@@ -1,0 +1,807 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="./" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+    <title>Probability and Random Variables &#8212; The Principles of Statistical Modelling</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  <!--
+    this give us a css class that will be invisible only if js is disabled
+  -->
+  <noscript>
+    <style>
+      .pst-js-only { display: none !important; }
+
+    </style>
+  </noscript>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="_static/styles/theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+<link href="_static/styles/pydata-sphinx-theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="_static/styles/sphinx-book-theme.css?v=a3416100" />
+    <link rel="stylesheet" type="text/css" href="_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-design.min.css?v=95c83b7e" />
+  
+  <!-- So that users can add custom icons -->
+  <script src="_static/scripts/fontawesome.js?digest=8878045cc6db502f8baf"></script>
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf" />
+<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf" />
+
+    <script src="_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="_static/doctools.js?v=9a2dae69"></script>
+    <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="_static/copybutton.js?v=f281be69"></script>
+    <script src="_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="_static/togglebutton.js?v=4a39c7ea"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = '2.prob-random-vars';</script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Parametric Statistical Models" href="3.stat-models.html" />
+    <link rel="prev" title="Understanding Variance" href="1.understanding-variance.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  <meta name="docsearch:version" content="" />
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <dialog id="pst-search-dialog">
+    
+<form class="bd-search d-flex align-items-center"
+      action="search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form>
+  </dialog>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <dialog id="pst-primary-sidebar-modal"></dialog>
+      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="0.intro.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="_static/logo.png" class="logo__image only-light" alt="The Principles of Statistical Modelling - Home"/>
+    <img src="_static/logo.png" class="logo__image only-dark pst-js-only" alt="The Principles of Statistical Modelling - Home"/>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="0.intro.html">
+                    Introduction
+                </a>
+            </li>
+        </ul>
+        <ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="1.understanding-variance.html">Understanding Variance</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Probability and Random Variables</a></li>
+<li class="toctree-l1"><a class="reference internal" href="3.stat-models.html">Parametric Statistical Models</a></li>
+<li class="toctree-l1"><a class="reference internal" href="4.maximum-likelihood.html">Maximum Likelihood Estimation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="5.classical-inference.html">Classical Statistical Inference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="summary.html">Summary</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+      <div class="sidebar-primary-item">
+<div id="ethical-ad-placement"
+      class="flat"
+      data-ea-publisher="readthedocs"
+      data-ea-type="readthedocs-sidebar"
+      data-ea-manual="true">
+</div></div>
+  </div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/PCHN63101-Advanced-Data-Skills/principles-stat-modelling" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/PCHN63101-Advanced-Data-Skills/principles-stat-modelling/issues/new?title=Issue%20on%20page%20%2F2.prob-random-vars.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="_sources/2.prob-random-vars.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
+</button>
+
+
+<button class="btn btn-sm pst-navbar-icon search-button search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+</button>
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Probability and Random Variables</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#random-variables">Random Variables</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#discrete-random-variables">Discrete Random Variables</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#continuous-random-variables">Continuous Random Variables</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#properties-of-probability-distributions">Properties of Probability Distributions</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-expected-value">The Expected Value</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#why-is-the-expected-value-important">Why is the Expected Value Important?</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-variance">The Variance</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#manipulating-random-variables">Manipulating Random Variables</a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="probability-and-random-variables">
+<h1>Probability and Random Variables<a class="headerlink" href="#probability-and-random-variables" title="Link to this heading">#</a></h1>
+<p>We have now established that <em>variance</em> is the key element of data that we wish to capture. The fact that measured values differ from datapoint-to-datapoint implies an inherent <em>randomess</em> and <em>uncertainty</em> to real-world data. As such, in order to say anything about the variance in our data, we need some means of formalising this randomness. This formalisation comes from the field of <em>probability</em>.</p>
+<div class="tip admonition">
+<p class="admonition-title">Key Concept</p>
+<p>Unlike the common understanding of the term, <em>randomness</em> in probability does not mean completely unstructured and unpredictable. In everyday speech, when we say that something happened “randomly”, that is often taken as meaning that it could not have been predicted. However, in the more formal world of probability, the term <em>random</em> has a very specific definition that means something that is unpredictable in the short term, but has a <em>predictable regularity</em> over the long term. This is captured within the concept of a <em>random variable</em>.</p>
+</div>
+<section id="random-variables">
+<h2>Random Variables<a class="headerlink" href="#random-variables" title="Link to this heading">#</a></h2>
+<p>A <em>random variable</em> refers to any variable whos value changes with each measurement, but whos behaviour over time adheres to a known <em>probability distribution</em>. This is an important concept because every value that we measure as part of an experiment is concptualised as a realisation of a given random variable. For instance, we would treat <em>reaction time</em> as a random variable, with each measured value of reaction time representing a realistion of that random variable. Implicit in this is the idea that reaction time adheres to some probability distribution and that our experiment is simply the process of sampling value from that distribution.</p>
+<p>In general, there are two different classes of random variable: <em>discrete</em> and <em>continuous</em>. This is an important distinction because one of the first things we need to do when analysing a dataset is determin which of the outcome variables are <em>discrete</em> and which are <em>continuous</em>, as this will then dictate the range of suitable models we can use.</p>
+<section id="discrete-random-variables">
+<h3>Discrete Random Variables<a class="headerlink" href="#discrete-random-variables" title="Link to this heading">#</a></h3>
+<p>The first class of random variables concern those where the number of possible outcomes is <em>finite</em>. For instance, tossing a coin and seeing whether the outcome is either heads or tails. Counting the face values of two dice would also be discrete, because there are only a limited number of outcomes. Indeed, counting anything would be considered discrete because there are only a finite number of possibilities, with no values in-between. In all these cases, we can consider the outcome of the experiment<a class="footnote-reference brackets" href="#probexp" id="id1" role="doc-noteref"><span class="fn-bracket">[</span>1<span class="fn-bracket">]</span></a> to be a random variable governed by some discrete probability distribution.</p>
+<p>The textbook example of this is counting the number of heads after flipping a coin multiple times. For instance, if we flipped a coin 20 times then the probability of different numbers of <em>heads</em> can be described by the <em>binomial</em> distribution. If <span class="math notranslate nohighlight">\(y\)</span> is the count of the number of <em>heads</em>, then <span class="math notranslate nohighlight">\(y\)</span> is a random variable drawn from the binomial distribution, which we write as</p>
+<div class="math notranslate nohighlight">
+\[
+y \sim \mathcal{B}\left(n,p\right).
+\]</div>
+<p>The shape of the distribition is controlled by two <em>parameters</em>, <span class="math notranslate nohighlight">\(n\)</span> and <span class="math notranslate nohighlight">\(p\)</span>. In this example, <span class="math notranslate nohighlight">\(n\)</span> is the number of coin flips and <span class="math notranslate nohighlight">\(p\)</span> is the probability of <em>heads</em> on a single flip. So, here <span class="math notranslate nohighlight">\(n = 20\)</span> and (assuming the coin is fair) <span class="math notranslate nohighlight">\(p = 0.5\)</span>. Knowing these parameter values allows us to know everything we need to about the behaviour of <span class="math notranslate nohighlight">\(y\)</span>.</p>
+<div class="tip admonition">
+<p class="admonition-title">What is a Parameter?</p>
+<p>A <em>parameter</em>, very generally, is simply a number, but one which has particular <em>importance</em> for understanding some system. In the context of probability distributions, the parameters are numbers that control the <em>shape</em> of the distribution. We typically conceptualise a probability distribution as representing some <em>population</em> where the parameters are constants that describe the behaviour of that population. As such, these are numbers that carry great importance for understanding the variable we are trying to capture. Make sure you have a clear handle on this, because the parameters are the <em>key focus</em> of statistical models.</p>
+</div>
+<p>We can use <code class="docutils literal notranslate"><span class="pre">R</span></code> to simulate realisations of this random variable</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="nf">set.seed</span><span class="p">(</span><span class="m">666</span><span class="p">)</span>
+<span class="n">y</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">rbinom</span><span class="p">(</span><span class="n">n</span><span class="o">=</span><span class="m">10</span><span class="p">,</span><span class="w"> </span><span class="n">size</span><span class="o">=</span><span class="m">20</span><span class="p">,</span><span class="w"> </span><span class="n">prob</span><span class="o">=</span><span class="m">0.5</span><span class="p">)</span>
+<span class="n">y</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><style>
+.list-inline {list-style: none; margin:0; padding: 0}
+.list-inline>li {display: inline-block}
+.list-inline>li:not(:last-child)::after {content: "\00b7"; padding: 0 .5ex}
+</style>
+<ol class=list-inline><li>12</li><li>8</li><li>14</li><li>8</li><li>9</li><li>11</li><li>14</li><li>10</li><li>5</li><li>9</li></ol>
+</div></div>
+</div>
+<p>which we can think of 10 repeats of flipping a coin 20 times and counting the number of heads. The first time we do this, we get <span class="math notranslate nohighlight">\(\frac{12}{20}\)</span> heads, the second time we get <span class="math notranslate nohighlight">\(\frac{8}{20}\)</span> heads and so on. Notice that we have no real way of knowing what the next value will be and thus, in the short-term, the variable <span class="math notranslate nohighlight">\(y\)</span> is unpredictable. However, in the long-term, we know how frequently certain values will appear and thus there is a much more general sense of predictability.</p>
+<p>We can visualise the complete distribution <span class="math notranslate nohighlight">\(\mathcal{B}\left(20,0.5\right)\)</span> using the code below. You can play around with the values of <code class="docutils literal notranslate"><span class="pre">n</span></code> and <code class="docutils literal notranslate"><span class="pre">p</span></code> to see how the distribution changes shape.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="c1"># Binomial probabilities</span>
+<span class="n">n</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="m">20</span>
+<span class="n">p</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="m">0.5</span>
+<span class="n">y</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">dbinom</span><span class="p">(</span><span class="m">0</span><span class="o">:</span><span class="n">n</span><span class="p">,</span><span class="w"> </span><span class="n">size</span><span class="o">=</span><span class="n">n</span><span class="p">,</span><span class="w"> </span><span class="n">prob</span><span class="o">=</span><span class="n">p</span><span class="p">)</span>
+
+<span class="c1"># Plot</span>
+<span class="nf">par</span><span class="p">(</span><span class="n">cex.lab</span><span class="o">=</span><span class="m">1.3</span><span class="p">,</span><span class="w"> </span><span class="n">cex.axis</span><span class="o">=</span><span class="m">1.1</span><span class="p">,</span><span class="w"> </span><span class="n">cex</span><span class="o">=</span><span class="m">1.4</span><span class="p">)</span><span class="w"> </span><span class="c1"># plot scaling</span>
+<span class="nf">barplot</span><span class="p">(</span><span class="n">y</span><span class="p">,</span><span class="w"> </span><span class="n">names.arg</span><span class="o">=</span><span class="m">0</span><span class="o">:</span><span class="n">n</span><span class="p">,</span><span class="w"> </span>
+<span class="w">        </span><span class="n">main</span><span class="o">=</span><span class="nf">paste0</span><span class="p">(</span><span class="s">&quot;Binomial Distribution (n=&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">n</span><span class="p">,</span><span class="w"> </span><span class="s">&quot; p=&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">p</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;)&quot;</span><span class="p">),</span><span class="w"> </span>
+<span class="w">        </span><span class="n">xlab</span><span class="o">=</span><span class="s">&quot;Number of Heads&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">ylab</span><span class="o">=</span><span class="s">&quot;Probability&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">col</span><span class="o">=</span><span class="s">&quot;skyblue&quot;</span><span class="p">,</span><span class="w"> </span>
+<span class="w">        </span><span class="n">border</span><span class="o">=</span><span class="s">&quot;blue&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<a class="reference internal image-reference" href="_images/28f1d14afc9c2992e2fe887b032db671fb51d4481fadf8a547fbd6eaf628768a.png"><img alt="_images/28f1d14afc9c2992e2fe887b032db671fb51d4481fadf8a547fbd6eaf628768a.png" src="_images/28f1d14afc9c2992e2fe887b032db671fb51d4481fadf8a547fbd6eaf628768a.png" style="width: 840px; height: 480px;" /></a>
+</div>
+</div>
+<p>Although experimental psychologists do not spend much time flipping coins, we need to think more generally about the utility of probability distributions. For instance, imagine an experiment where each subject completes a number of trials. After each trial, their response can be categorised in one of two ways. Over all the trials we sum the number of times their response is in one category rather than the other. In this example, the measurement could be considered a binomial random variable, with <span class="math notranslate nohighlight">\(n\)</span> equal to the number of trials and <span class="math notranslate nohighlight">\(p\)</span> unknown. The purpose of the experiment is then to estimate what <span class="math notranslate nohighlight">\(p\)</span> might be and, potentially, how <span class="math notranslate nohighlight">\(p\)</span> changes under different manipulations.</p>
+<p>Other examples of discrete probability distributions include the <a class="reference external" href="https://en.wikipedia.org/wiki/Bernoulli_distribution">Bernoulli distribution</a>, <a class="reference external" href="https://en.wikipedia.org/wiki/Poisson_distribution">Poisson distribution</a> and the <a class="reference external" href="https://en.wikipedia.org/wiki/Negative_binomial_distribution">negative binomial distribution</a>.</p>
+<div class="important admonition">
+<p class="admonition-title">Treating Discrete as Continuous</p>
+<p>In many real-world cases of discrete random variables, you may find them being treated as <em>continuous</em> for the purpose of statistical analysis. For instance, the binomial distribution shown above <em>could</em> be approximated by a normal distribution. Historically, psychologists do this frequently when dealing with discrete data, such as the scores from a questionnaire or counts of the number of items remembered after a memory test. An argument can be made that the underlying structure that we are measuring is continuous and thus a predicted questionnaire score of <code class="docutils literal notranslate"><span class="pre">5.324</span></code> or quoting <code class="docutils literal notranslate"><span class="pre">7.235</span></code> items remembered are meaningful representation of the <em>latent variable</em> that is being captured. However, in many cases, this is done simply because psychologists are not well-trained on how to deal with discrete outcomes and so often simply ignore the true nature of what they are measuring. To become a powerful data analyst, it is important that this sort of information is <em>not</em> ignored and that the data are treated appropriately.</p>
+</div>
+</section>
+<section id="continuous-random-variables">
+<h3>Continuous Random Variables<a class="headerlink" href="#continuous-random-variables" title="Link to this heading">#</a></h3>
+<p>The second class of random variables concern those where the number of possible values is <em>infinte</em>. This can either be within an <em>unbounded</em> range (so the values can span <span class="math notranslate nohighlight">\(-\infty\)</span> to <span class="math notranslate nohighlight">\(\infty\)</span>), or within a <em>bounded</em> range (such as anything between 0 and 1).</p>
+<p>In many real-world situations our measurements are continuous and so treating the outcomes of experiments as <em>continuous</em> random variables is common. Indeed, huge amount of statistical theory are exclusively dedicated to continuous random variables. As an example, measuring the <em>height</em> of females in the UK could be conceptualised as a random variable drawn from a <em>normal</em> distribution. If <span class="math notranslate nohighlight">\(y\)</span> is the measurement of <em>height</em>, we would write</p>
+<div class="math notranslate nohighlight">
+\[
+y \sim \mathcal{N}\left(\mu,\sigma^{2}\right).
+\]</div>
+<p>Like the binomial distribution, the shape of the normal distribution is controlled by two parameters. The first is the <em>mean</em> (denoted <span class="math notranslate nohighlight">\(\mu\)</span>), which controls the value that the distribution is centred-on. The second is the <em>variance</em> (denoted <span class="math notranslate nohighlight">\(\sigma^{2}\)</span>), which controls the <em>width</em> of the distribution and thus how much values drawn from the distribution will differ from the mean.</p>
+<p>For the example of <em>height</em>, we could set <span class="math notranslate nohighlight">\(\mu = 162\)</span> and <span class="math notranslate nohighlight">\(\sigma^{2} = 6^{2} = 36\)</span>, both measured in centimetres. We could then use <code class="docutils literal notranslate"><span class="pre">R</span></code> to simulate realisations of this random variable using the <code class="docutils literal notranslate"><span class="pre">rnorm</span></code> function<a class="footnote-reference brackets" href="#rnorm" id="id2" role="doc-noteref"><span class="fn-bracket">[</span>2<span class="fn-bracket">]</span></a></p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="n">y</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">rnorm</span><span class="p">(</span><span class="n">n</span><span class="o">=</span><span class="m">10</span><span class="p">,</span><span class="w"> </span><span class="n">mean</span><span class="o">=</span><span class="m">162</span><span class="p">,</span><span class="w"> </span><span class="n">sd</span><span class="o">=</span><span class="nf">sqrt</span><span class="p">(</span><span class="m">36</span><span class="p">))</span>
+<span class="n">y</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><style>
+.list-inline {list-style: none; margin:0; padding: 0}
+.list-inline>li {display: inline-block}
+.list-inline>li:not(:last-child)::after {content: "\00b7"; padding: 0 .5ex}
+</style>
+<ol class=list-inline><li>166.550377068006</li><li>154.16288844593</li><li>157.184882587777</li><li>151.246554993233</li><li>161.747805275864</li><li>174.900255707068</li><li>151.378614970781</li><li>167.187921567392</li><li>151.679064611033</li><li>162.804754008847</li></ol>
+</div></div>
+</div>
+<p>which we can think of as measuring the height of 10 random females in the UK. We can also visualise the distribution <span class="math notranslate nohighlight">\(\mathcal{N}\left(162,36\right)\)</span> using the code below. Again, you can play around with the values of <code class="docutils literal notranslate"><span class="pre">mean</span></code> and <code class="docutils literal notranslate"><span class="pre">sd</span></code> to see how the distribution changes shape.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="c1"># Normal parameters</span>
+<span class="n">mean</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="m">162</span>
+<span class="n">sd</span><span class="w">   </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">sqrt</span><span class="p">(</span><span class="m">36</span><span class="p">)</span>
+
+<span class="c1"># Generate x values (+/- 4 SDs from the mean)</span>
+<span class="n">x</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">seq</span><span class="p">(</span><span class="n">mean</span><span class="m">-4</span><span class="o">*</span><span class="n">sd</span><span class="p">,</span><span class="w"> </span><span class="n">mean</span><span class="m">+4</span><span class="o">*</span><span class="n">sd</span><span class="p">,</span><span class="w"> </span><span class="n">length</span><span class="o">=</span><span class="m">1000</span><span class="p">)</span>
+
+<span class="c1"># Calculate the normal density</span>
+<span class="n">y</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">dnorm</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="w"> </span><span class="n">mean</span><span class="o">=</span><span class="n">mean</span><span class="p">,</span><span class="w"> </span><span class="n">sd</span><span class="o">=</span><span class="n">sd</span><span class="p">)</span>
+
+<span class="c1"># Plot</span>
+<span class="nf">par</span><span class="p">(</span><span class="n">cex.lab</span><span class="o">=</span><span class="m">1.3</span><span class="p">,</span><span class="w"> </span><span class="n">cex.axis</span><span class="o">=</span><span class="m">1.1</span><span class="p">,</span><span class="w"> </span><span class="n">cex</span><span class="o">=</span><span class="m">1.4</span><span class="p">)</span><span class="w"> </span><span class="c1"># plot scaling</span>
+<span class="nf">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="w"> </span><span class="n">y</span><span class="p">,</span><span class="w"> </span><span class="n">type</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;l&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">lwd</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">2</span><span class="p">,</span><span class="w"> </span><span class="n">col</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;blue&quot;</span><span class="p">,</span>
+<span class="w">     </span><span class="n">main</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">paste0</span><span class="p">(</span><span class="s">&quot;Normal Distribution (μ = &quot;</span><span class="p">,</span><span class="w"> </span><span class="n">mean</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;, σ = &quot;</span><span class="p">,</span><span class="w"> </span><span class="n">sd</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;)&quot;</span><span class="p">),</span>
+<span class="w">     </span><span class="n">xlab</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;Height&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">ylab</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;Probability Density&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<a class="reference internal image-reference" href="_images/c1a9e1797276545c61ebdd791b39cf16378880725deeddb58710a89352b7997e.png"><img alt="_images/c1a9e1797276545c61ebdd791b39cf16378880725deeddb58710a89352b7997e.png" src="_images/c1a9e1797276545c61ebdd791b39cf16378880725deeddb58710a89352b7997e.png" style="width: 840px; height: 480px;" /></a>
+</div>
+</div>
+<p>Like the example earlier, it is unlikely that, as an experimental psychologist, you would spend much time measuring people’s <em>height</em>. However, thinking more generally, you might end up measuring <em>reaction time</em>, scores from a <em>visual analogue scale</em>, <em>IQ</em>, metrics derived from <em>eye-tracking</em> or <em>time spent</em> attending to a visual stimulus. These are all examples of measures that can, in theory, take an infinite number of values within a given range and thus are all examples of continuous random variables.</p>
+<p>Although the normal distribution is used most frequently, other examples of continuous probability distributions include the <a class="reference external" href="https://en.wikipedia.org/wiki/Gamma_distribution">gamma distribution</a>, <a class="reference external" href="https://en.wikipedia.org/wiki/Log-normal_distribution">log-normal distribution</a> and the <a class="reference external" href="https://en.wikipedia.org/wiki/Continuous_uniform_distribution">uniform distribution</a>.</p>
+<div class="tip admonition">
+<p class="admonition-title">Key Concept</p>
+<p>When we conduct an experiment, we concptualise the variables that we are measuring as <em>random variables</em>. This means that their values will change with each measurement and are governed by some random process. In this context, <em>random</em> means that their behaviour adheres to some probability distribution. As such, the variance in our measurements contains a known structure in terms of the underlying probability distribution. Our experiment is then conceptualised as the process of making random draws from that distribution. The shape of the distribution is governed by a number of <em>parameters</em>, which are conceptualised as <em>fixed constants</em> of the population we are drawing samples from. Our aim, very generally, is to use the information in the sample to estimate those population parameter values. This is how a statistical model attempts to explain the seemingly random variations in real-world measurements.</p>
+</div>
+</section>
+</section>
+<section id="properties-of-probability-distributions">
+<h2>Properties of Probability Distributions<a class="headerlink" href="#properties-of-probability-distributions" title="Link to this heading">#</a></h2>
+<p>Beyond understanding the concepts of random variables and probability distributions, there are a number of properties of distributions that are worth understanding before we go further.</p>
+<section id="the-expected-value">
+<h3>The Expected Value<a class="headerlink" href="#the-expected-value" title="Link to this heading">#</a></h3>
+<p>All distributions have a property known as the <em>expected value</em>. Informally, this is equivalent to the <em>mean</em> of the distribution and thus it tells us the value that we <em>expect</em>, on average. More formally, the expected value is a form of <em>weighted-average</em>, but its precise mathematical definition is not really important for our purposes. For instance, if we have a random variable <span class="math notranslate nohighlight">\(y\)</span> that adheres to</p>
+<div class="math notranslate nohighlight">
+\[
+y \sim \mathcal{N}\left(\mu,\sigma^{2}\right),
+\]</div>
+<p>then its expected value is</p>
+<div class="math notranslate nohighlight">
+\[
+E\left(y\right) = \mu.
+\]</div>
+<p>As such, our <em>prediction</em> for any realisation of <span class="math notranslate nohighlight">\(y\)</span> would be equal to the mean of the distribution. This is an obvious example because the normal distribution has an expected value that is equal to one of its parameters. However, the principle is applicable to <em>any</em> distribution, whether its mean is coded directly by one of the parameters or not. For instance, if we had</p>
+<div class="math notranslate nohighlight">
+\[
+y \sim \mathcal{B}\left(n,p\right)
+\]</div>
+<p>then the expected value of <span class="math notranslate nohighlight">\(y\)</span> becomes</p>
+<div class="math notranslate nohighlight">
+\[
+E\left(y\right) = np.
+\]</div>
+<p>How this result is reached is not especially important for us, but just note that it works by looking at the Binomial distribution we visualised earlier.</p>
+<div class="tip admonition">
+<p class="admonition-title">Equations for the Expected Value</p>
+<p>If you are ever curious, the <a class="reference external" href="https://en.wikipedia.org/wiki/Probability_distribution">Wikipedia pages</a> for all the most common probability distributions contain tables giving the formulas for their various properties, including the mean. For some distributions, the mean is the same as one of the parameters (e.g. the normal distribution, the Poisson distribution), whereas for others the mean is some function of the parameters (e.g. the binomial distribution, the uniform distribution).</p>
+</div>
+<section id="why-is-the-expected-value-important">
+<h4>Why is the Expected Value Important?<a class="headerlink" href="#why-is-the-expected-value-important" title="Link to this heading">#</a></h4>
+<p>The importance of the expected value is that it is not subject to random variation. It is the element of the distribution that does not change across measurements and thus represents some <em>universal truth</em> of the variable in question. In essence, the expected value is the <em>predictable</em> part of the variable. Because of this, we can conceptualise any value we measure as the expected value plus some random variation.</p>
+<div class="math notranslate nohighlight">
+\[
+y = E\left(y\right) + \epsilon
+\]</div>
+<p>where</p>
+<div class="math notranslate nohighlight">
+\[
+\epsilon = y - E\left(y\right),
+\]</div>
+<p>in other words, this is the <em>error</em>, conceptualised as the difference between the value we expected and the actual data. We will see how this is used in the context of statistical models shortly. For now, just be aware that statistical models attempt to capture the expect value of the variable in question, meaning that the expected value is effectively our primary focus when it comes to building a statistical model.</p>
+<p>To see this more clearly, take the distribution</p>
+<div class="math notranslate nohighlight">
+\[
+y \sim \mathcal{N}\left(\mu,\sigma^{2}\right)
+\]</div>
+<p>with <span class="math notranslate nohighlight">\(\mu = 2\)</span> and <span class="math notranslate nohighlight">\(\sigma^{2} = 1\)</span>. Imagine that we then sampled a value of 5. We can think of this as being the mean plus some random variation</p>
+<div class="math notranslate nohighlight">
+\[
+y_{1} = \mu + \epsilon_{1} = 2 + 3 = 5.
+\]</div>
+<p>Imagine that we then sampled a value of 0.5. We can think of this as</p>
+<div class="math notranslate nohighlight">
+\[
+y_{2} = \mu + \epsilon_{2} = 2 + -1.5 = 0.5.
+\]</div>
+<p>So notice that there is an element that is <em>constant</em> across measurements and an element that <em>changes</em> with each measurement. In this way, every single data value <em>contains</em> the expected value of the distribution. This is a <em>constant</em> that is true across all the data. As such, it is the random element <span class="math notranslate nohighlight">\(\epsilon\)</span> that has probabilistic behaviour. If we remove the expected value, all we do in centre the data around 0, but we do not remove any of the randomness. We can see this below for <code class="docutils literal notranslate"><span class="pre">mpg</span></code>.</p>
+<div class="cell tag_hide-input docutils container">
+<details class="hide above-input">
+<summary aria-label="Toggle hidden content">
+<span class="collapsed">Show code cell source</span>
+<span class="expanded">Hide code cell source</span>
+</summary>
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="nf">par</span><span class="p">(</span><span class="n">mfrow</span><span class="o">=</span><span class="nf">c</span><span class="p">(</span><span class="m">2</span><span class="p">,</span><span class="m">2</span><span class="p">),</span><span class="w"> </span><span class="n">mar</span><span class="o">=</span><span class="nf">c</span><span class="p">(</span><span class="m">5</span><span class="p">,</span><span class="w"> </span><span class="m">5</span><span class="p">,</span><span class="w"> </span><span class="m">2</span><span class="p">,</span><span class="w"> </span><span class="m">2</span><span class="p">))</span>
+<span class="nf">par</span><span class="p">(</span><span class="n">cex.lab</span><span class="o">=</span><span class="m">1.1</span><span class="p">,</span><span class="w"> </span><span class="n">cex.axis</span><span class="o">=</span><span class="m">1</span><span class="p">,</span><span class="w"> </span><span class="n">cex</span><span class="o">=</span><span class="m">1.1</span><span class="p">)</span><span class="w"> </span><span class="c1"># plot scaling</span>
+
+<span class="nf">hist</span><span class="p">(</span><span class="n">mtcars</span><span class="o">$</span><span class="n">mpg</span><span class="p">,</span><span class="w">                    </span><span class="n">breaks</span><span class="o">=</span><span class="m">10</span><span class="p">,</span><span class="w"> </span><span class="n">xlab</span><span class="o">=</span><span class="s">&quot;MPG&quot;</span><span class="p">,</span><span class="w">        </span><span class="n">main</span><span class="o">=</span><span class="s">&quot;Raw Data&quot;</span><span class="p">)</span>
+<span class="nf">hist</span><span class="p">(</span><span class="n">mtcars</span><span class="o">$</span><span class="n">mpg</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="nf">mean</span><span class="p">(</span><span class="n">mtcars</span><span class="o">$</span><span class="n">mpg</span><span class="p">),</span><span class="w"> </span><span class="n">breaks</span><span class="o">=</span><span class="m">10</span><span class="p">,</span><span class="w"> </span><span class="n">xlab</span><span class="o">=</span><span class="s">&quot;MPG - Mean&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">main</span><span class="o">=</span><span class="s">&quot;Errors&quot;</span><span class="p">)</span>
+
+<span class="nf">plot</span><span class="p">(</span><span class="nf">seq</span><span class="p">(</span><span class="m">1</span><span class="p">,</span><span class="nf">length</span><span class="p">(</span><span class="n">mtcars</span><span class="o">$</span><span class="n">mpg</span><span class="p">)),</span><span class="w"> </span><span class="n">mtcars</span><span class="o">$</span><span class="n">mpg</span><span class="p">,</span><span class="w">                  </span><span class="n">xlab</span><span class="o">=</span><span class="s">&quot;Car&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">ylab</span><span class="o">=</span><span class="s">&quot;MPG&quot;</span><span class="p">,</span><span class="w">        </span><span class="n">main</span><span class="o">=</span><span class="s">&quot;&quot;</span><span class="p">)</span>
+<span class="nf">plot</span><span class="p">(</span><span class="nf">seq</span><span class="p">(</span><span class="m">1</span><span class="p">,</span><span class="nf">length</span><span class="p">(</span><span class="n">mtcars</span><span class="o">$</span><span class="n">mpg</span><span class="p">)),</span><span class="w"> </span><span class="n">mtcars</span><span class="o">$</span><span class="n">mpg</span><span class="o">-</span><span class="nf">mean</span><span class="p">(</span><span class="n">mtcars</span><span class="o">$</span><span class="n">mpg</span><span class="p">),</span><span class="w"> </span><span class="n">xlab</span><span class="o">=</span><span class="s">&quot;Car&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">ylab</span><span class="o">=</span><span class="s">&quot;MPG - Mean&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">main</span><span class="o">=</span><span class="s">&quot;&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</details>
+<div class="cell_output docutils container">
+<a class="reference internal image-reference" href="_images/1040c991d8c06a6277640107c8dc81c6c14538fc8bdcd9965a9b44d15ad9202d.png"><img alt="_images/1040c991d8c06a6277640107c8dc81c6c14538fc8bdcd9965a9b44d15ad9202d.png" src="_images/1040c991d8c06a6277640107c8dc81c6c14538fc8bdcd9965a9b44d15ad9202d.png" style="width: 840px; height: 480px;" /></a>
+</div>
+</div>
+<p>Because the expected value is a constant across all the data, we can also express the probability model</p>
+<div class="math notranslate nohighlight">
+\[
+y_{i} \sim \mathcal{N}\left(\mu,\sigma^{2}\right)
+\]</div>
+<p>as</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{align*}
+y_{i} &amp;= \mu + \epsilon_{i} \\
+\epsilon_{i} &amp;\sim \mathcal{N}\left(0,\sigma^{2}\right)
+\end{align*}
+\end{split}\]</div>
+<p>From this perspective, variation in <span class="math notranslate nohighlight">\(y\)</span> can be broken into two sources. The first is the expected value, which influences the <em>scaling</em> of <span class="math notranslate nohighlight">\(y\)</span> and is <em>constant</em> across all the values. The second is the <em>error</em>, which influences the degree to which the data deviates from the expected value. Because the expected value is constant, the randomness in the data comes from the <em>errors</em>. Thus, it is the <em>errors</em> that have a probability distribution. The expected values influence how <em>predictable</em> the data are and the errors influence how <em>unpredictable</em> the data are. In terms of statistical modelling, it is the <em>predictable</em> element we wish to capture as a universal truth of the variable in question.</p>
+</section>
+</section>
+<section id="the-variance">
+<h3>The Variance<a class="headerlink" href="#the-variance" title="Link to this heading">#</a></h3>
+<p>… All distributions have some metric of their variance, even if there is not a parameter that directly controls it (such as the normal distribution). For instance, the binomial distribution has a variance equal to <span class="math notranslate nohighlight">\(np(1-p)\)</span>. … Formally, this is known as the <em>second moment</em> of a distribution.</p>
+<div class="tip admonition">
+<p class="admonition-title">Moments of Distributions</p>
+<p>The <em>expected value</em> and the <em>variance</em> are both examples of the <em>moments</em> of a probability distribution…</p>
+</div>
+</section>
+</section>
+<section id="manipulating-random-variables">
+<h2>Manipulating Random Variables<a class="headerlink" href="#manipulating-random-variables" title="Link to this heading">#</a></h2>
+<p>… It is important to recognise that when a random variable is manipulated in some way, the fact that it is random does not change. However, the specific distribution <em>will</em> change. … A lot of effort within classical statistics has been dedicated to manipulating random variables and then trying to figure out what distribution the manipulated value has.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="n">y</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">rnorm</span><span class="p">(</span><span class="n">n</span><span class="o">=</span><span class="m">1000</span><span class="p">,</span><span class="w"> </span><span class="n">mean</span><span class="o">=</span><span class="m">0</span><span class="p">,</span><span class="w"> </span><span class="n">sd</span><span class="o">=</span><span class="m">1</span><span class="p">)</span>
+
+<span class="nf">par</span><span class="p">(</span><span class="n">mfrow</span><span class="o">=</span><span class="nf">c</span><span class="p">(</span><span class="m">1</span><span class="p">,</span><span class="m">2</span><span class="p">))</span>
+<span class="nf">hist</span><span class="p">(</span><span class="n">y</span><span class="p">,</span><span class="w"> </span><span class="n">probability</span><span class="o">=</span><span class="kc">TRUE</span><span class="p">,</span><span class="w"> </span><span class="n">breaks</span><span class="o">=</span><span class="m">30</span><span class="p">)</span>
+<span class="nf">curve</span><span class="p">(</span><span class="nf">dnorm</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="w"> </span><span class="n">mean</span><span class="o">=</span><span class="m">0</span><span class="p">,</span><span class="w"> </span><span class="n">sd</span><span class="o">=</span><span class="m">1</span><span class="p">),</span>
+<span class="w">      </span><span class="n">col</span><span class="o">=</span><span class="s">&quot;red&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">lwd</span><span class="o">=</span><span class="m">2</span><span class="p">,</span><span class="w"> </span><span class="n">add</span><span class="o">=</span><span class="kc">TRUE</span><span class="p">)</span>
+
+<span class="nf">hist</span><span class="p">(</span><span class="n">y</span><span class="o">^</span><span class="m">2</span><span class="p">,</span><span class="w"> </span><span class="n">probability</span><span class="o">=</span><span class="kc">TRUE</span><span class="p">,</span><span class="w"> </span><span class="n">breaks</span><span class="o">=</span><span class="m">30</span><span class="p">)</span>
+<span class="nf">curve</span><span class="p">(</span><span class="nf">dchisq</span><span class="p">(</span><span class="n">x</span><span class="o">^</span><span class="m">2</span><span class="p">,</span><span class="w"> </span><span class="n">df</span><span class="o">=</span><span class="m">1</span><span class="p">),</span>
+<span class="w">      </span><span class="n">col</span><span class="o">=</span><span class="s">&quot;red&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">lwd</span><span class="o">=</span><span class="m">2</span><span class="p">,</span><span class="w"> </span><span class="n">add</span><span class="o">=</span><span class="kc">TRUE</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<a class="reference internal image-reference" href="_images/383c66fc74dfc518a836bf9de45daca40c6dd869ea6919838a16faf728fc504f.png"><img alt="_images/383c66fc74dfc518a836bf9de45daca40c6dd869ea6919838a16faf728fc504f.png" src="_images/383c66fc74dfc518a836bf9de45daca40c6dd869ea6919838a16faf728fc504f.png" style="width: 840px; height: 480px;" /></a>
+</div>
+</div>
+<aside class="topic">
+<p class="topic-title">Section Summary</p>
+<p>In this section, we have explored the general framework under which the vast majority of analyses in this course will be based.</p>
+</aside>
+<hr class="footnotes docutils" />
+<aside class="footnote-list brackets">
+<aside class="footnote brackets" id="probexp" role="note">
+<span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id1">1</a><span class="fn-bracket">]</span></span>
+<p>Note that an “experiment” in the context of probability theory has a much broader definition than we would typically use in science.</p>
+</aside>
+<aside class="footnote brackets" id="rnorm" role="note">
+<span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id2">2</a><span class="fn-bracket">]</span></span>
+<p>Note that the <code class="docutils literal notranslate"><span class="pre">rnorm</span></code> function parameterises the normal distribution using the <em>standard deviation</em>, rather than the <em>variance.</em></p>
+</aside>
+</aside>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "r"
+        },
+        kernelOptions: {
+            name: "ir",
+            path: "./."
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'ir'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="1.understanding-variance.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Understanding Variance</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="3.stat-models.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Parametric Statistical Models</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <dialog id="pst-secondary-sidebar-modal"></dialog>
+                <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#random-variables">Random Variables</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#discrete-random-variables">Discrete Random Variables</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#continuous-random-variables">Continuous Random Variables</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#properties-of-probability-distributions">Properties of Probability Distributions</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-expected-value">The Expected Value</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#why-is-the-expected-value-important">Why is the Expected Value Important?</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-variance">The Variance</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#manipulating-random-variables">Manipulating Random Variables</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Dr George Farmer & Dr Martyn McFarquhar
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2026.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script defer src="_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf"></script>
+<script defer src="_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

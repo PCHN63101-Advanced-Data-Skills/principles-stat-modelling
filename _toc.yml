@@ -1,0 +1,12 @@
+# Table of contents
+# Learn more at https://jupyterbook.org/customize/toc.html
+
+format: jb-book
+root: 0.intro
+chapters:
+- file: 1.understanding-variance
+- file: 2.prob-random-vars
+- file: 3.stat-models
+- file: 4.maximum-likelihood
+- file: 5.classical-inference
+- file: summary
