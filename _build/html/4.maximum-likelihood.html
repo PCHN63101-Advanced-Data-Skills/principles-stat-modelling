@@ -346,7 +346,9 @@
 <button class="btn btn-sm pst-navbar-icon search-button search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
     <i class="fa-solid fa-magnifying-glass fa-lg"></i>
 </button>
-
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
 </div></div>
       
     </div>
@@ -362,6 +364,19 @@
     <div id="print-main-content">
         <div id="jb-print-toc">
             
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#estimating-parameters">Estimating Parameters</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#properties-of-good-estimators">Properties of Good Estimators</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#bias">Bias</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-maximum-likelihood-algorithm">The Maximum Likelihood Algorithm</a></li>
+</ul>
+            </nav>
         </div>
     </div>
 </div>
@@ -373,6 +388,19 @@
                   
   <section class="tex2jax_ignore mathjax_ignore" id="maximum-likelihood-estimation">
 <h1>Maximum Likelihood Estimation<a class="headerlink" href="#maximum-likelihood-estimation" title="Link to this heading">#</a></h1>
+<p>In the previous section, we saw how conceptualising our measurements as a random variable led to a model of the <em>data-generating processing</em>. This model centres around some probability distribution with a finite number of parameters. These parameters relate to both the <em>expected value</em> and the <em>variance</em> of the distribution, which in turn tell us everything that we need to know about the variable in question. This can be thought of as a <em>simplification</em> process, where the information within the <span class="math notranslate nohighlight">\(n\)</span> datapoints is summarised by the <span class="math notranslate nohighlight">\(k\)</span> parameters of the distribution. As every datapoint can be conceptualised as a combination of the expected value and random variation, these parameters can be used to explain every value we measure. As such, the parameters of the proposed distrubution are <em>the most important element of our statistical model</em>.</p>
+<section id="estimating-parameters">
+<h2>Estimating Parameters<a class="headerlink" href="#estimating-parameters" title="Link to this heading">#</a></h2>
+<p>Given the importance of the parameters, we of course what to know what their values are. Unfortunately, we do not often have the whole population at our disposal. If we did, we could simply calculate the parameter values and be done. More typically, we only have a <em>sample</em> of values from the distribution and therefore must use the information within the same to <em>estimate</em> the parameter values.</p>
+</section>
+<section id="properties-of-good-estimators">
+<h2>Properties of Good Estimators<a class="headerlink" href="#properties-of-good-estimators" title="Link to this heading">#</a></h2>
+<section id="bias">
+<h3>Bias<a class="headerlink" href="#bias" title="Link to this heading">#</a></h3>
+</section>
+</section>
+<section id="the-maximum-likelihood-algorithm">
+<h2>The Maximum Likelihood Algorithm<a class="headerlink" href="#the-maximum-likelihood-algorithm" title="Link to this heading">#</a></h2>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="nf">set.seed</span><span class="p">(</span><span class="m">666</span><span class="p">)</span>
@@ -396,6 +424,11 @@
 <div class="output text_html">49.9299299299299</div><a class="reference internal image-reference" href="_images/f22a192644361b90c6604e54c8d29ab642ecf83354b5344c9d8ad3c7c7856772.png"><img alt="_images/f22a192644361b90c6604e54c8d29ab642ecf83354b5344c9d8ad3c7c7856772.png" src="_images/f22a192644361b90c6604e54c8d29ab642ecf83354b5344c9d8ad3c7c7856772.png" style="width: 420px; height: 420px;" /></a>
 </div>
 </div>
+<aside class="topic">
+<p class="topic-title">Section Summary</p>
+<p>In this section, we have explored …</p>
+</aside>
+</section>
 </section>
 
     <script type="text/x-thebe-config">
@@ -452,6 +485,27 @@
             </div>
             
             
+              
+                <dialog id="pst-secondary-sidebar-modal"></dialog>
+                <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#estimating-parameters">Estimating Parameters</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#properties-of-good-estimators">Properties of Good Estimators</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#bias">Bias</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-maximum-likelihood-algorithm">The Maximum Likelihood Algorithm</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
               
             
           </div>

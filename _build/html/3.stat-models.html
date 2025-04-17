@@ -472,6 +472,19 @@ y_{i} \sim \mathcal{N}\left(\mu,\sigma\right)
 </div></div>
 </div>
 <p>Now, the degree to which this is a <em>good</em> model is not something we are concerned with at this moment. But we should be thinking of this as our proposed <em>data generating process</em>. If the data appears to adhere to this model, then we can assume that we have capture some element of how the data values came to be. The better the model fit, the more confidence we have that this conceptualisation of MPG as a normal random variate is reflective of reality.</p>
+<p>The key thing to understand here is that we have now created a <em>model of the observed variance</em> for <code class="docutils literal notranslate"><span class="pre">mpg</span></code>. In the previous section, we simply calculated the variance without any reference to a probability distribution. This was not a model, it was simply a quantification of what we could see in the data. By adding the normal distribution, we have turned this observation into a <em>model</em>. This is to say that we have a mathematical description of where the data comes from and why it varies the way it does. We have created a proposition for the <em>data generating process</em> and in doing so have condensed all the information within the data into two key number: the mean of the distribution and the variance of the distribution. Taken together, we have proposed these two numbers explain everything that we can see. The mean gives us some universal truth that exists across every measurement of <code class="docutils literal notranslate"><span class="pre">mpg</span></code> and the variance tells us how much we expect measured values of <code class="docutils literal notranslate"><span class="pre">mpg</span></code> to deviate from this universal truth.</p>
+<div class="math notranslate nohighlight">
+\[
+y_{i} \sim \mathcal{N}\left(\mu,\sigma^{2}\right) 
+\]</div>
+<p>or, equivalently, as</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{align*}
+    y_{i}           &amp;= \mu + \epsilon_{i}                       \\ 
+    \epsilon_{i}    &amp;\sim \mathcal{N}\left(0,\sigma^{2}\right). \\
+\end{align*}
+\end{split}\]</div>
 <aside class="topic">
 <p class="topic-title">Section Summary</p>
 <p>In this section, we have explored the general framework under which the vast majority of analyses in this course will be based.</p>

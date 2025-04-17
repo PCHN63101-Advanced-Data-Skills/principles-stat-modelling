@@ -372,7 +372,8 @@
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#defining-variance">Defining Variance</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#measuring-variance">Measuring Variance</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#interpreting-variance">Interpreting Variance</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#standardising-distances">Standardising Distances</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-standard-deviation">The Standard Deviation</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#scaling-distances">Scaling Distances</a></li>
 </ul>
 </li>
 </ul>
@@ -388,10 +389,10 @@
                   
   <section class="tex2jax_ignore mathjax_ignore" id="understanding-variance">
 <h1>Understanding Variance<a class="headerlink" href="#understanding-variance" title="Link to this heading">#</a></h1>
-<p>Before we start discussing simple and multiple regression, it is worth taking some time to understand what we are trying to achieve at a much higher level. Both <em>simple</em> and <em>multiple</em> regression are examples of <em>statistical models</em>. Although your prior experiences may have left the impression that statistics is about <em>hypothesis tests</em>, the reality is that statistics is a science concerned with building <em>models</em> of data. This concept of model building is <em>fundamental</em> to a much deeper understanding of statistics and is fundamental to your success on the rest of this course. As such, we will spend some time at the beginning of this lesson exploring what we mean by a statistical model before we go any further.</p>
+<p>The key insight that we want you to achieve on this course is that statistics is a science concerned with building <em>models</em> of data. Although your prior experiences may have left the impression that statistics is about <em>hypothesis tests</em>, the reality is that this is a very narrow and unhelpful perspective. The concept of a data analysis being an exercise in <em>model building</em> is fundamental to a much deeper understanding of statistics, and is fundamental to your success on the rest of this course. To facilitate this, we will start with some core principles that are essential for developing an intuitive understanding of statistical models. Perhaps more than any other concept in statistics, the idea of <em>variance</em> is essential for understanding the purpose of a statistical model.</p>
 <section id="defining-variance">
 <h2>Defining Variance<a class="headerlink" href="#defining-variance" title="Link to this heading">#</a></h2>
-<p>The starting point for understanding statistical modelling is understanding the concept of <em>variance</em>. Variance is the basic currency of statistics. It is the fundamental information that data holds and is the feature of data that all statistical models aim to capture. Variance is therefore a very important concept and so we need to be clear on what <em>exactly</em> variance is.</p>
+<p>Variance is, in many ways, the basic currency of statistics. It is the fundamental information that data holds and is the feature of data that all statistical models aim to capture. Variance is therefore a very important concept and so we need to be clear on what <em>exactly</em> variance is.</p>
 <p>Informally, the idea of variance is very simple. For a given set of data, we want to understand the reason why the measured values are different from each other. In other words, why does the data <em>vary</em>? If data did not vary, it would be constant. Every time we took a measurement we would get the same value. In this scenario, the data would be <em>perfectly predictable</em> and there would be no need for statistics.</p>
 <p>As an example, consider the plot of all the measurements of <code class="docutils literal notranslate"><span class="pre">mpg</span></code> from the <code class="docutils literal notranslate"><span class="pre">mtcars</span></code> dataset<a class="footnote-reference brackets" href="#foot1" id="id1" role="doc-noteref"><span class="fn-bracket">[</span>1<span class="fn-bracket">]</span></a> shown below. Clearly, the values of <code class="docutils literal notranslate"><span class="pre">mpg</span></code> differ from car-to-car. This is expected, but take a moment to consider <em>why</em> this is the case?</p>
 <div class="cell tag_hide-input docutils container">
@@ -512,12 +513,15 @@
 <section id="interpreting-variance">
 <h2>Interpreting Variance<a class="headerlink" href="#interpreting-variance" title="Link to this heading">#</a></h2>
 <p>One of the disadvantages of the definition of variance given above is that it is expressed in squared-units of the variable in question, which can be hard to interpret. As such, when interpretation matters, it is more usual to use <span class="math notranslate nohighlight">\(\sigma\)</span> rather than <span class="math notranslate nohighlight">\(\sigma^{2}\)</span>, by taking the square-root of the variance. This produces a value in the original units of the variable and can be interpreted as the average deviation from the mean. This should be familiar to you as the <em>standard deviation</em>. For example, <span class="math notranslate nohighlight">\(\sqrt{35.19} = 5.93\)</span>. So, the average amount that cars deviate from the mean is 5.93 MPG. Note that this is mainly useful for <em>interpretation</em>, but scaling the variance in this fashion is not always needed. For instance, if we are taking ratios of variance, whether we do so in the original units or in scaled units will make no difference.</p>
-<section id="standardising-distances">
-<h3>Standardising Distances<a class="headerlink" href="#standardising-distances" title="Link to this heading">#</a></h3>
+<section id="the-standard-deviation">
+<h3>The Standard Deviation<a class="headerlink" href="#the-standard-deviation" title="Link to this heading">#</a></h3>
+</section>
+<section id="scaling-distances">
+<h3>Scaling Distances<a class="headerlink" href="#scaling-distances" title="Link to this heading">#</a></h3>
 <p>Sometimes it is useful to express distances in units of standard deviation, because this makes the description unit-less and thus applicable to lots of different types of data. For instance, we saw above that datapoint 7 was 5.79 MPG below the mean. The standard deviation for this dataset, based on the variance calculated above, is <span class="math notranslate nohighlight">\(\sigma = \sqrt{35.19} = 5.93\)</span>. If we divide these values, we can express datapoint 7’s discrepancy in terms of standard deviations, giving <span class="math notranslate nohighlight">\(\frac{-5.79}{5.93} = -0.98\)</span>. As such, we can say that datapoint 7 lies 0.98 standard deviations below the mean, irrespective of the original units of the data. You may recognise this as the process used to create <em>test statistics</em>, which is something we will return to later in this lesson.</p>
 <aside class="topic">
 <p class="topic-title">Section Summary</p>
-<p>In this section, we have explored the important concept of <em>variance</em>, which is key to understanding the general sim of statistical models. …</p>
+<p>In this section, we have explored the important concept of <em>variance</em> …</p>
 </aside>
 <hr class="footnotes docutils" />
 <aside class="footnote-list brackets">
@@ -606,7 +610,8 @@
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#defining-variance">Defining Variance</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#measuring-variance">Measuring Variance</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#interpreting-variance">Interpreting Variance</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#standardising-distances">Standardising Distances</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-standard-deviation">The Standard Deviation</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#scaling-distances">Scaling Distances</a></li>
 </ul>
 </li>
 </ul>
