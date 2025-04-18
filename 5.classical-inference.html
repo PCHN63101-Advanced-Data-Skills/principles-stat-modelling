@@ -60,6 +60,8 @@
     <script async="async" src="_static/sphinx-thebe.js?v=c100c467"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
     <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = '5.classical-inference';</script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
@@ -344,7 +346,9 @@
 <button class="btn btn-sm pst-navbar-icon search-button search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
     <i class="fa-solid fa-magnifying-glass fa-lg"></i>
 </button>
-
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
 </div></div>
       
     </div>
@@ -360,6 +364,14 @@
     <div id="print-main-content">
         <div id="jb-print-toc">
             
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#manipulating-random-variables">Manipulating Random Variables</a></li>
+</ul>
+            </nav>
         </div>
     </div>
 </div>
@@ -375,6 +387,42 @@
 <p class="topic-title">Section Summary</p>
 <p>In this section, we have explored …</p>
 </aside>
+<section id="manipulating-random-variables">
+<h2>Manipulating Random Variables<a class="headerlink" href="#manipulating-random-variables" title="Link to this heading">#</a></h2>
+<p>… It is important to recognise that when a random variable is manipulated in some way, the fact that it is random does not change. However, the specific distribution <em>will</em> change. … A lot of effort within classical statistics has been dedicated to manipulating random variables and then trying to figure out what distribution the manipulated value has.</p>
+<p>As an example, it is a known result in mathematical statistics that if you square a random variable that has a standard normal distribution, the resultant random variable has a <span class="math notranslate nohighlight">\(\chi^{2}\)</span> distribution. So, formally, we have</p>
+<div class="math notranslate nohighlight">
+\[
+y \sim \mathcal{N}\left(0,1\right)
+\]</div>
+<p>and</p>
+<div class="math notranslate nohighlight">
+\[
+y^{2} \sim \chi^{2}\left(1\right).
+\]</div>
+<p>The importance of this is to note two things. One is that transforming or manipulating a random variable does <em>not</em> remove the randomness, it just changes it. As such, any equation that contains a random variable will result in another random variable. This will be important going forward. The second is that much of classical statistics is constrained by requiring the distribution of the manipulated random variable to be known. As such, many of the methods and results that we used are based on these distributions being <em>tractable</em>. If no one has worked out what the distribution is, the manipulation cannot be used. This restriction can explain a lot of the choices made within the context of statistical modelling. For instance, the normal distribution is used so frequently because there are a multitude of results that are mathematically convenient, allowing these forms of distributions to be easily determined. We will see examples of this later in this lesson.</p>
+<p>Rather than relying on statistical theory, we can also use <code class="docutils literal notranslate"><span class="pre">R</span></code> to simulate this situation and show that it is correct. In the code below, we use the <code class="docutils literal notranslate"><span class="pre">dnorm()</span></code> function to calculate the standard normal density and the <code class="docutils literal notranslate"><span class="pre">dchisq()</span></code> function to calculate the <span class="math notranslate nohighlight">\(\chi^{2}\)</span> density. We add these as curves on top of the histograms using the <code class="docutils literal notranslate"><span class="pre">curve()</span></code> function</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="nf">set.seed</span><span class="p">(</span><span class="m">666</span><span class="p">)</span>
+<span class="n">y</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">rnorm</span><span class="p">(</span><span class="n">n</span><span class="o">=</span><span class="m">5000</span><span class="p">,</span><span class="w"> </span><span class="n">mean</span><span class="o">=</span><span class="m">0</span><span class="p">,</span><span class="w"> </span><span class="n">sd</span><span class="o">=</span><span class="m">1</span><span class="p">)</span>
+
+<span class="nf">par</span><span class="p">(</span><span class="n">mfrow</span><span class="o">=</span><span class="nf">c</span><span class="p">(</span><span class="m">1</span><span class="p">,</span><span class="m">2</span><span class="p">))</span>
+<span class="nf">par</span><span class="p">(</span><span class="n">cex.lab</span><span class="o">=</span><span class="m">1.5</span><span class="p">,</span><span class="w"> </span><span class="n">cex.axis</span><span class="o">=</span><span class="m">1.2</span><span class="p">,</span><span class="w"> </span><span class="n">cex</span><span class="o">=</span><span class="m">1.2</span><span class="p">)</span><span class="w"> </span><span class="c1"># plot scaling</span>
+
+<span class="nf">hist</span><span class="p">(</span><span class="n">y</span><span class="p">,</span><span class="w"> </span><span class="n">probability</span><span class="o">=</span><span class="kc">TRUE</span><span class="p">,</span><span class="w"> </span><span class="n">breaks</span><span class="o">=</span><span class="m">50</span><span class="p">,</span><span class="w"> </span><span class="n">col</span><span class="o">=</span><span class="s">&quot;skyblue&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">border</span><span class="o">=</span><span class="s">&quot;blue&quot;</span><span class="p">)</span>
+<span class="nf">curve</span><span class="p">(</span><span class="nf">dnorm</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">mean</span><span class="o">=</span><span class="m">0</span><span class="p">,</span><span class="n">sd</span><span class="o">=</span><span class="m">1</span><span class="p">),</span><span class="w"> </span><span class="n">col</span><span class="o">=</span><span class="s">&quot;red&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">lwd</span><span class="o">=</span><span class="m">5</span><span class="p">,</span><span class="w"> </span><span class="n">add</span><span class="o">=</span><span class="kc">TRUE</span><span class="p">)</span>
+
+<span class="nf">hist</span><span class="p">(</span><span class="n">y</span><span class="o">^</span><span class="m">2</span><span class="p">,</span><span class="w"> </span><span class="n">probability</span><span class="o">=</span><span class="kc">TRUE</span><span class="p">,</span><span class="w"> </span><span class="n">breaks</span><span class="o">=</span><span class="m">50</span><span class="p">,</span><span class="w"> </span><span class="n">col</span><span class="o">=</span><span class="s">&quot;skyblue&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">border</span><span class="o">=</span><span class="s">&quot;blue&quot;</span><span class="p">)</span>
+<span class="nf">curve</span><span class="p">(</span><span class="nf">dchisq</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">df</span><span class="o">=</span><span class="m">1</span><span class="p">),</span><span class="w"> </span><span class="n">col</span><span class="o">=</span><span class="s">&quot;red&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">lwd</span><span class="o">=</span><span class="m">5</span><span class="p">,</span><span class="w"> </span><span class="n">add</span><span class="o">=</span><span class="kc">TRUE</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<a class="reference internal image-reference" href="_images/ebf277fa7f25ae2b38290e012a53534968a65fd4a9876069458ce894ef5ce62e.png"><img alt="_images/ebf277fa7f25ae2b38290e012a53534968a65fd4a9876069458ce894ef5ce62e.png" src="_images/ebf277fa7f25ae2b38290e012a53534968a65fd4a9876069458ce894ef5ce62e.png" style="width: 840px; height: 480px;" /></a>
+</div>
+</div>
+</section>
 </section>
 
     <script type="text/x-thebe-config">
@@ -431,6 +479,22 @@
             </div>
             
             
+              
+                <dialog id="pst-secondary-sidebar-modal"></dialog>
+                <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#manipulating-random-variables">Manipulating Random Variables</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
               
             
           </div>

@@ -374,15 +374,11 @@
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#continuous-random-variables">Continuous Random Variables</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#properties-of-probability-distributions">Properties of Probability Distributions</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-expected-value">The Expected Value</a><ul class="nav section-nav flex-column">
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#why-is-the-expected-value-important">Why is the Expected Value Important?</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-expected-value-of-a-distribution">The Expected Value of a Distribution</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#why-is-the-expected-value-important">Why is the Expected Value Important?</a></li>
 </ul>
 </li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-variance">The Variance</a></li>
-</ul>
-</li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#manipulating-random-variables">Manipulating Random Variables</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-variance-of-a-distribution">The Variance of a Distribution</a></li>
 </ul>
             </nav>
         </div>
@@ -519,70 +515,63 @@ y \sim \mathcal{N}\left(\mu,\sigma^{2}\right).
 <p>Like the example earlier, it is unlikely that, as an experimental psychologist, you would spend much time measuring people’s <em>height</em>. However, thinking more generally, you might end up measuring <em>reaction time</em>, scores from a <em>visual analogue scale</em>, <em>IQ</em>, metrics derived from <em>eye-tracking</em> or <em>time spent</em> attending to a visual stimulus. These are all examples of measures that can, in theory, take an infinite number of values within a given range and thus are all examples of continuous random variables.</p>
 <p>Although the normal distribution is used most frequently, other examples of continuous probability distributions include the <a class="reference external" href="https://en.wikipedia.org/wiki/Gamma_distribution">gamma distribution</a>, <a class="reference external" href="https://en.wikipedia.org/wiki/Log-normal_distribution">log-normal distribution</a> and the <a class="reference external" href="https://en.wikipedia.org/wiki/Continuous_uniform_distribution">uniform distribution</a>.</p>
 <div class="tip admonition">
-<p class="admonition-title">Key Concept</p>
+<p class="admonition-title">The Core Assumptions of an Experiment</p>
 <p>When we conduct an experiment, we concptualise the variables that we are measuring as <em>random variables</em>. This means that their values will change with each measurement and are governed by some random process. In this context, <em>random</em> means that their behaviour adheres to some probability distribution. As such, the variance in our measurements contains a known structure in terms of the underlying probability distribution. Our experiment is then conceptualised as the process of making random draws from that distribution. The shape of the distribution is governed by a number of <em>parameters</em>, which are conceptualised as <em>fixed constants</em> of the population we are drawing samples from. Our aim, very generally, is to use the information in the sample to estimate those population parameter values. This is how a statistical model attempts to explain the seemingly random variations in real-world measurements.</p>
 </div>
 </section>
 </section>
-<section id="properties-of-probability-distributions">
-<h2>Properties of Probability Distributions<a class="headerlink" href="#properties-of-probability-distributions" title="Link to this heading">#</a></h2>
-<p>Beyond understanding the concepts of random variables and probability distributions, there are a number of properties of distributions that are worth understanding before we go further.</p>
-<section id="the-expected-value">
-<h3>The Expected Value<a class="headerlink" href="#the-expected-value" title="Link to this heading">#</a></h3>
-<p>All distributions have a property known as the <em>expected value</em>. Informally, this is equivalent to the <em>mean</em> of the distribution and thus it tells us the value that we <em>expect</em>, on average. More formally, the expected value is a form of <em>weighted-average</em>, but its precise mathematical definition is not really important for our purposes. For instance, if we have a random variable <span class="math notranslate nohighlight">\(y\)</span> that adheres to</p>
+<section id="the-expected-value-of-a-distribution">
+<h2>The Expected Value of a Distribution<a class="headerlink" href="#the-expected-value-of-a-distribution" title="Link to this heading">#</a></h2>
+<p>All distributions have a property known as the <em>expected value</em>. Informally, this is equivalent to the <em>mean</em> of the distribution and thus it tells us the value that we <em>expect</em>, on average. More formally, the expected value is a form of <em>weighted-average</em>, where each value is weighted by its probability. However, the precise mathematical definition is not really important for our purposes. Instead, we just need to understand the term conceptually. For instance, if we have a random variable <span class="math notranslate nohighlight">\(y\)</span> that adheres to</p>
 <div class="math notranslate nohighlight">
 \[
 y \sim \mathcal{N}\left(\mu,\sigma^{2}\right),
 \]</div>
-<p>then its expected value is</p>
+<p>then the mathematical definition of the expected value results in</p>
 <div class="math notranslate nohighlight">
 \[
 E\left(y\right) = \mu.
 \]</div>
-<p>As such, our <em>prediction</em> for any realisation of <span class="math notranslate nohighlight">\(y\)</span> would be equal to the mean of the distribution. This is an obvious example because the normal distribution has an expected value that is equal to one of its parameters. However, the principle is applicable to <em>any</em> distribution, whether its mean is coded directly by one of the parameters or not. For instance, if we had</p>
+<p>As such, our <em>expectation</em> for any realisation of <span class="math notranslate nohighlight">\(y\)</span> would be equal to the mean of the distribution. This is an obvious example because the normal distribution has an expected value that is equal to one of its parameters. However, the principle is applicable to <em>any</em> distribution, whether its mean is coded directly by one of the parameters or not. For instance, if we had</p>
 <div class="math notranslate nohighlight">
 \[
 y \sim \mathcal{B}\left(n,p\right)
 \]</div>
-<p>then the expected value of <span class="math notranslate nohighlight">\(y\)</span> becomes</p>
+<p>then the expected value of <span class="math notranslate nohighlight">\(y\)</span> turns out to be</p>
 <div class="math notranslate nohighlight">
 \[
 E\left(y\right) = np.
 \]</div>
-<p>How this result is reached is not especially important for us, but just note that it works by looking at the Binomial distribution we visualised earlier.</p>
+<p>Why this is true is not especially important for us. Just note that it <em>is</em> true by looking at the Binomial distribution we visualised earlier.</p>
 <div class="tip admonition">
 <p class="admonition-title">Equations for the Expected Value</p>
 <p>If you are ever curious, the <a class="reference external" href="https://en.wikipedia.org/wiki/Probability_distribution">Wikipedia pages</a> for all the most common probability distributions contain tables giving the formulas for their various properties, including the mean. For some distributions, the mean is the same as one of the parameters (e.g. the normal distribution, the Poisson distribution), whereas for others the mean is some function of the parameters (e.g. the binomial distribution, the uniform distribution).</p>
 </div>
 <section id="why-is-the-expected-value-important">
-<h4>Why is the Expected Value Important?<a class="headerlink" href="#why-is-the-expected-value-important" title="Link to this heading">#</a></h4>
-<p>The importance of the expected value is that it is not subject to random variation. It is the element of the distribution that does not change across measurements and thus represents some <em>universal truth</em> of the variable in question. In essence, the expected value is the <em>predictable</em> part of the variable. Because of this, we can conceptualise any value we measure as the expected value plus some random variation.</p>
+<h3>Why is the Expected Value Important?<a class="headerlink" href="#why-is-the-expected-value-important" title="Link to this heading">#</a></h3>
+<p>The importance of the expected value is that it is not subject to random variation. It is the element of the distribution that does not change across measurements and thus represents some <em>universal truth</em> of the variable in question. In essence, the expected value is the <em>predictable</em> part of the variable. Because of this, we can conceptualise any realisation of a random variable as the expected value plus some random variation</p>
 <div class="math notranslate nohighlight">
 \[
-y = E\left(y\right) + \epsilon
+y_{i} = E\left(y\right) + \epsilon_{i}.
 \]</div>
-<p>where</p>
+<p>Here, <span class="math notranslate nohighlight">\(\epsilon_{i}\)</span> is the <span class="math notranslate nohighlight">\(i\)</span>th <em>error</em>, conceptualised as the difference between the value we expected and the actual value of <span class="math notranslate nohighlight">\(y_{i}\)</span>. The importance of this is that most statistical models aim to capture the expect value of the variable in question. This means that the expected value is effectively our primary focus when it comes to building a statistical model.</p>
+<p>To see this more clearly, take the random variable</p>
 <div class="math notranslate nohighlight">
 \[
-\epsilon = y - E\left(y\right),
+y_{i} \sim \mathcal{N}\left(\mu,\sigma^{2}\right)
 \]</div>
-<p>in other words, this is the <em>error</em>, conceptualised as the difference between the value we expected and the actual data. We will see how this is used in the context of statistical models shortly. For now, just be aware that statistical models attempt to capture the expect value of the variable in question, meaning that the expected value is effectively our primary focus when it comes to building a statistical model.</p>
-<p>To see this more clearly, take the distribution</p>
-<div class="math notranslate nohighlight">
-\[
-y \sim \mathcal{N}\left(\mu,\sigma^{2}\right)
-\]</div>
-<p>with <span class="math notranslate nohighlight">\(\mu = 2\)</span> and <span class="math notranslate nohighlight">\(\sigma^{2} = 1\)</span>. Imagine that we then sampled a value of 5. We can think of this as being the mean plus some random variation</p>
+<p>with <span class="math notranslate nohighlight">\(\mu = 2\)</span> and <span class="math notranslate nohighlight">\(\sigma^{2} = 1\)</span>. Imagine that the first value we samples <span class="math notranslate nohighlight">\((i=1)\)</span> was equal to 5. We can think of this as being the mean plus some random variation</p>
 <div class="math notranslate nohighlight">
 \[
 y_{1} = \mu + \epsilon_{1} = 2 + 3 = 5.
 \]</div>
-<p>Imagine that we then sampled a value of 0.5. We can think of this as</p>
+<p>Imagine that the second value we sampled <span class="math notranslate nohighlight">\((i=2)\)</span> was then equal to 0.5. We can think of this as</p>
 <div class="math notranslate nohighlight">
 \[
 y_{2} = \mu + \epsilon_{2} = 2 + -1.5 = 0.5.
 \]</div>
-<p>So notice that there is an element that is <em>constant</em> across measurements and an element that <em>changes</em> with each measurement. In this way, every single data value <em>contains</em> the expected value of the distribution. This is a <em>constant</em> that is true across all the data. As such, it is the random element <span class="math notranslate nohighlight">\(\epsilon\)</span> that has probabilistic behaviour. If we remove the expected value, all we do in centre the data around 0, but we do not remove any of the randomness. We can see this below for <code class="docutils literal notranslate"><span class="pre">mpg</span></code>.</p>
+<p>So notice that there is an element that is <em>constant</em> across measurements and an element that <em>changes</em> with each measurement. In this way, every single value we measure <em>contains</em> the expected value of the distribution.</p>
+<p>The important conclusion from this is that, because the expected value is <em>constant</em>, it cannot be the source of the random variance that we see in real data. Because of this, the randomness must come from the errors. As such, it is <span class="math notranslate nohighlight">\(\epsilon\)</span> that has probabilistic behaviour. We can see this by removing the expected value from the data. When we do this, all that happens is that we centre the data around 0. This makes sense, because we have subtracted the expected value and thus the expectation of all datapoints becomes 0. However, importantly, we do not remove any of the randomness. We can see this demonstrated in <code class="docutils literal notranslate"><span class="pre">R</span></code>, using <code class="docutils literal notranslate"><span class="pre">mpg</span></code> as an example</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="nf">par</span><span class="p">(</span><span class="n">mfrow</span><span class="o">=</span><span class="nf">c</span><span class="p">(</span><span class="m">2</span><span class="p">,</span><span class="m">2</span><span class="p">),</span><span class="w"> </span><span class="n">mar</span><span class="o">=</span><span class="nf">c</span><span class="p">(</span><span class="m">5</span><span class="p">,</span><span class="m">5</span><span class="p">,</span><span class="m">2</span><span class="p">,</span><span class="m">2</span><span class="p">))</span>
@@ -604,7 +593,7 @@ y_{2} = \mu + \epsilon_{2} = 2 + -1.5 = 0.5.
 <a class="reference internal image-reference" href="_images/054b9e72c8d15c51853b2285190d91a76ada6cbd10ef37e425d880363ba927fa.png"><img alt="_images/054b9e72c8d15c51853b2285190d91a76ada6cbd10ef37e425d880363ba927fa.png" src="_images/054b9e72c8d15c51853b2285190d91a76ada6cbd10ef37e425d880363ba927fa.png" style="width: 840px; height: 480px;" /></a>
 </div>
 </div>
-<p>Because the expected value is a constant across all the data, we can also express the probability model</p>
+<p>So notice that both the <em>errors</em> and the <em>raw data</em> have the same distribution. The only element that changes is that the data are rescaled so that the mean is 0. What this means is that we can also express the probability model</p>
 <div class="math notranslate nohighlight">
 \[
 y_{i} \sim \mathcal{N}\left(\mu,\sigma^{2}\right)
@@ -617,56 +606,23 @@ y_{i} &amp;= \mu + \epsilon_{i} \\
 \epsilon_{i} &amp;\sim \mathcal{N}\left(0,\sigma^{2}\right)
 \end{align*}
 \end{split}\]</div>
-<p>From this perspective, variation in <span class="math notranslate nohighlight">\(y\)</span> can be broken into two sources. The first is the expected value, which influences the <em>scaling</em> of <span class="math notranslate nohighlight">\(y\)</span> and is <em>constant</em> across all the values. The second is the <em>error</em>, which influences the degree to which the data deviates from the expected value. Because the expected value is constant, the randomness in the data comes from the <em>errors</em>. Thus, it is the <em>errors</em> that have a probability distribution. The expected values influence how <em>predictable</em> the data are and the errors influence how <em>unpredictable</em> the data are. In terms of statistical modelling, it is the <em>predictable</em> element we wish to capture as a universal truth of the variable in question.</p>
+<p>From this perspective, variation in <span class="math notranslate nohighlight">\(y\)</span> can be broken into two sources. The first is the expected value, which influences the <em>scaling</em> of <span class="math notranslate nohighlight">\(y\)</span> and is <em>constant</em> across all the values. The second is the <em>error</em>, which influences the degree to which the data deviates from the expected value. Because the expected value is constant, the randomness in the data comes from the <em>errors</em>. Thus, it is the <em>errors</em> that have a probability distribution. The expected values influence how <em>predictable</em> the data are and the errors influence how <em>unpredictable</em> the data are. In terms of statistical modelling, it is therefore the <em>predictable</em> element we wish to capture.</p>
 </section>
 </section>
-<section id="the-variance">
-<h3>The Variance<a class="headerlink" href="#the-variance" title="Link to this heading">#</a></h3>
-<p>… All distributions have some metric of their variance, even if there is not a parameter that directly controls it (such as the normal distribution). For instance, the binomial distribution has a variance equal to <span class="math notranslate nohighlight">\(np(1-p)\)</span>. … Formally, this is known as the <em>second moment</em> of a distribution.</p>
-<div class="tip admonition">
-<p class="admonition-title">Moments of Distributions</p>
-<p>The <em>expected value</em> and the <em>variance</em> are both examples of the <em>moments</em> of a probability distribution…</p>
-</div>
-</section>
-</section>
-<section id="manipulating-random-variables">
-<h2>Manipulating Random Variables<a class="headerlink" href="#manipulating-random-variables" title="Link to this heading">#</a></h2>
-<p>… It is important to recognise that when a random variable is manipulated in some way, the fact that it is random does not change. However, the specific distribution <em>will</em> change. … A lot of effort within classical statistics has been dedicated to manipulating random variables and then trying to figure out what distribution the manipulated value has.</p>
-<p>As an example, it is a known result in mathematical statistics that if you square a random variable that has a standard normal distribution, the resultant random variable has a <span class="math notranslate nohighlight">\(\chi^{2}\)</span> distribution. So, formally, we have</p>
+<section id="the-variance-of-a-distribution">
+<h2>The Variance of a Distribution<a class="headerlink" href="#the-variance-of-a-distribution" title="Link to this heading">#</a></h2>
+<p>As well as an expected value, all distributions have some concept of <em>variance</em>. Because probability distributions are <em>models</em> of reality, they need to capture the randomness inherent in real-world measurements. We began this lesson by discussing the concept of variance very generally, but now we can start to see how probability distributions formalise this idea. The constant scaling of data is captured by the expected value and the variation around the expected value is captured by the variance. This provides a means of both <em>describing</em> and <em>predicting</em> the behaviour of a random variable.</p>
+<p>Earlier, we used a simplified calculating for the variance. However, the formal definition is as follows:</p>
 <div class="math notranslate nohighlight">
 \[
-y \sim \mathcal{N}\left(0,1\right)
+\text{Var}\left(y\right) = E\left[\left(y - E\left[y\right]\right)^{2}\right]
 \]</div>
-<p>and</p>
-<div class="math notranslate nohighlight">
-\[
-y^{2} \sim \chi^{2}\left(1\right).
-\]</div>
-<p>The importance of this is to note two things. One is that transforming or manipulating a random variable does <em>not</em> remove the randomness, it just changes it. As such, any equation that contains a random variable will result in another random variable. This will be important going forward. The second is that much of classical statistics is constrained by requiring the distribution of the manipulated random variable to be known. As such, many of the methods and results that we used are based on these distributions being <em>tractable</em>. If no one has worked out what the distribution is, the manipulation cannot be used. This restriction can explain a lot of the choices made within the context of statistical modelling. For instance, the normal distribution is used so frequently because there are a multitude of results that are mathematically convenient, allowing these forms of distributions to be easily determined. We will see examples of this later in this lesson.</p>
-<p>Rather than relying on statistical theory, we can also use <code class="docutils literal notranslate"><span class="pre">R</span></code> to simulate this situation and show that it is correct. In the code below, we use the <code class="docutils literal notranslate"><span class="pre">dnorm()</span></code> function to calculate the standard normal density and the <code class="docutils literal notranslate"><span class="pre">dchisq()</span></code> function to calculate the <span class="math notranslate nohighlight">\(\chi^{2}\)</span> density. We add these as curves on top of the histograms using the <code class="docutils literal notranslate"><span class="pre">curve()</span></code> function</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="nf">set.seed</span><span class="p">(</span><span class="m">666</span><span class="p">)</span>
-<span class="n">y</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">rnorm</span><span class="p">(</span><span class="n">n</span><span class="o">=</span><span class="m">5000</span><span class="p">,</span><span class="w"> </span><span class="n">mean</span><span class="o">=</span><span class="m">0</span><span class="p">,</span><span class="w"> </span><span class="n">sd</span><span class="o">=</span><span class="m">1</span><span class="p">)</span>
-
-<span class="nf">par</span><span class="p">(</span><span class="n">mfrow</span><span class="o">=</span><span class="nf">c</span><span class="p">(</span><span class="m">1</span><span class="p">,</span><span class="m">2</span><span class="p">))</span>
-<span class="nf">par</span><span class="p">(</span><span class="n">cex.lab</span><span class="o">=</span><span class="m">1.5</span><span class="p">,</span><span class="w"> </span><span class="n">cex.axis</span><span class="o">=</span><span class="m">1.2</span><span class="p">,</span><span class="w"> </span><span class="n">cex</span><span class="o">=</span><span class="m">1.2</span><span class="p">)</span><span class="w"> </span><span class="c1"># plot scaling</span>
-
-<span class="nf">hist</span><span class="p">(</span><span class="n">y</span><span class="p">,</span><span class="w"> </span><span class="n">probability</span><span class="o">=</span><span class="kc">TRUE</span><span class="p">,</span><span class="w"> </span><span class="n">breaks</span><span class="o">=</span><span class="m">50</span><span class="p">,</span><span class="w"> </span><span class="n">col</span><span class="o">=</span><span class="s">&quot;skyblue&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">border</span><span class="o">=</span><span class="s">&quot;blue&quot;</span><span class="p">)</span>
-<span class="nf">curve</span><span class="p">(</span><span class="nf">dnorm</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">mean</span><span class="o">=</span><span class="m">0</span><span class="p">,</span><span class="n">sd</span><span class="o">=</span><span class="m">1</span><span class="p">),</span><span class="w"> </span><span class="n">col</span><span class="o">=</span><span class="s">&quot;red&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">lwd</span><span class="o">=</span><span class="m">5</span><span class="p">,</span><span class="w"> </span><span class="n">add</span><span class="o">=</span><span class="kc">TRUE</span><span class="p">)</span>
-
-<span class="nf">hist</span><span class="p">(</span><span class="n">y</span><span class="o">^</span><span class="m">2</span><span class="p">,</span><span class="w"> </span><span class="n">probability</span><span class="o">=</span><span class="kc">TRUE</span><span class="p">,</span><span class="w"> </span><span class="n">breaks</span><span class="o">=</span><span class="m">50</span><span class="p">,</span><span class="w"> </span><span class="n">col</span><span class="o">=</span><span class="s">&quot;skyblue&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">border</span><span class="o">=</span><span class="s">&quot;blue&quot;</span><span class="p">)</span>
-<span class="nf">curve</span><span class="p">(</span><span class="nf">dchisq</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">df</span><span class="o">=</span><span class="m">1</span><span class="p">),</span><span class="w"> </span><span class="n">col</span><span class="o">=</span><span class="s">&quot;red&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">lwd</span><span class="o">=</span><span class="m">5</span><span class="p">,</span><span class="w"> </span><span class="n">add</span><span class="o">=</span><span class="kc">TRUE</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<a class="reference internal image-reference" href="_images/ebf277fa7f25ae2b38290e012a53534968a65fd4a9876069458ce894ef5ce62e.png"><img alt="_images/ebf277fa7f25ae2b38290e012a53534968a65fd4a9876069458ce894ef5ce62e.png" src="_images/ebf277fa7f25ae2b38290e012a53534968a65fd4a9876069458ce894ef5ce62e.png" style="width: 840px; height: 480px;" /></a>
-</div>
-</div>
+<p>…</p>
+<p>Much the same as the expected value, all distributions have some metric of their variance, even if there is not a parameter that directly controls it. The normal distribution is the clearest example because the parameter <span class="math notranslate nohighlight">\(\sigma^{2}\)</span> <em>is</em> the variance. The binomial distribution, on the other hand, has a variance equal to <span class="math notranslate nohighlight">\(np(1-p)\)</span> and the <em>uniform</em> distribution has a variance of <span class="math notranslate nohighlight">\(\frac{1}{2}\left(b-a\right)^{2}\)</span>. This is just to say that the expression for the variance may not be obvious, but it does exist for all distributions. In this way, any distribution can be used a means of describing both the <em>predictable</em> elements of a variable (via the expected value) and the <em>unpredictable</em> elements of a variable (via the variance). Statistical models generally concern themselves with the <em>predictable</em> element, but must take the <em>unpredictable</em> element into account as a metric of uncertainty.</p>
+<p>… The variance can be captured through the errors.</p>
 <aside class="topic">
 <p class="topic-title">Section Summary</p>
-<p>In this section, we have explored …</p>
+<p>In this section, we have explored the core concept of a <em>random variable</em>. For any experiment, we conceptualise the values we are measuring as realisations of a random variable. This random variable is assumed to have some probability distribution whos shape is controlled by a finite number of parameters. Either directly or indirectly, those parameters determine both the <em>expected value</em> and <em>variance</em> of the distribution. The expected value is the key concern of most statistical models, as this captures some constant universal truth about the data. The variance, on the other hand, captures the degree to which the data does not adhere to the expected value. This can be thought of as splitting the variance in the data into two parts. The first captures some value universal to all the datapoints and the second part captures the errors. It is the errors that represent the randomness in the data and thus it is the errors that have a probability distribution.</p>
 </aside>
 <hr class="footnotes docutils" />
 <aside class="footnote-list brackets">
@@ -752,15 +708,11 @@ y^{2} \sim \chi^{2}\left(1\right).
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#continuous-random-variables">Continuous Random Variables</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#properties-of-probability-distributions">Properties of Probability Distributions</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-expected-value">The Expected Value</a><ul class="nav section-nav flex-column">
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#why-is-the-expected-value-important">Why is the Expected Value Important?</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-expected-value-of-a-distribution">The Expected Value of a Distribution</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#why-is-the-expected-value-important">Why is the Expected Value Important?</a></li>
 </ul>
 </li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-variance">The Variance</a></li>
-</ul>
-</li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#manipulating-random-variables">Manipulating Random Variables</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-variance-of-a-distribution">The Variance of a Distribution</a></li>
 </ul>
   </nav></div>
 
