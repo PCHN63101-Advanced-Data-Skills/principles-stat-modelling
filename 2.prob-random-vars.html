@@ -575,7 +575,20 @@ y_{1} = \mu + \epsilon_{1} = 2 + 3 = 5.
 y_{2} = \mu + \epsilon_{2} = 2 + -1.5 = 0.5.
 \]</div>
 <p>So notice that there is an element that is <em>constant</em> across measurements and an element that <em>changes</em> with each measurement. In this way, every single value we measure <em>contains</em> the expected value of the distribution.</p>
-<p>The important conclusion from this is that, because the expected value is <em>constant</em>, it cannot be the source of the random variance that we see in real data. Because of this, the randomness must come from the errors. As such, it is <span class="math notranslate nohighlight">\(\epsilon\)</span> that has probabilistic behaviour. We can see this by removing the expected value from the data. When we do this, all that happens is that we centre the data around 0. This makes sense, because we have subtracted the expected value and thus the expectation of all datapoints becomes 0. However, importantly, we do not remove any of the randomness. We can see this demonstrated in <code class="docutils literal notranslate"><span class="pre">R</span></code>, using <code class="docutils literal notranslate"><span class="pre">mpg</span></code> as an example</p>
+<p>The important conclusion from this is that, because the expected value is <em>constant</em>, it cannot be the source of the random variation that we see in real data. Because of this, the randomness must come from the errors. As such, it is <span class="math notranslate nohighlight">\(\epsilon\)</span> that has probabilistic behaviour and we can express the probability model</p>
+<div class="math notranslate nohighlight">
+\[
+y_{i} \sim \mathcal{N}\left(\mu,\sigma^{2}\right)
+\]</div>
+<p>as</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{align*}
+y_{i} &amp;= \mu + \epsilon_{i} \\
+\epsilon_{i} &amp;\sim \mathcal{N}\left(0,\sigma^{2}\right)
+\end{align*}
+\end{split}\]</div>
+<p>We can demonstrate this using <code class="docutils literal notranslate"><span class="pre">R</span></code> by removing the expected value from the data. When we do this, all that happens is that we centre the data around 0, as the expectation of all datapoints becomes 0. Importantly, we do not remove any of the randomness. Using <code class="docutils literal notranslate"><span class="pre">mpg</span></code> as an example, we have</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="nf">par</span><span class="p">(</span><span class="n">mfrow</span><span class="o">=</span><span class="nf">c</span><span class="p">(</span><span class="m">2</span><span class="p">,</span><span class="m">2</span><span class="p">),</span><span class="w"> </span><span class="n">mar</span><span class="o">=</span><span class="nf">c</span><span class="p">(</span><span class="m">5</span><span class="p">,</span><span class="m">5</span><span class="p">,</span><span class="m">2</span><span class="p">,</span><span class="m">2</span><span class="p">))</span>
@@ -597,19 +610,7 @@ y_{2} = \mu + \epsilon_{2} = 2 + -1.5 = 0.5.
 <a class="reference internal image-reference" href="_images/054b9e72c8d15c51853b2285190d91a76ada6cbd10ef37e425d880363ba927fa.png"><img alt="_images/054b9e72c8d15c51853b2285190d91a76ada6cbd10ef37e425d880363ba927fa.png" src="_images/054b9e72c8d15c51853b2285190d91a76ada6cbd10ef37e425d880363ba927fa.png" style="width: 840px; height: 480px;" /></a>
 </div>
 </div>
-<p>So notice that both the <em>errors</em> and the <em>raw data</em> have the same distribution. The only element that changes is that the data are rescaled so that the mean is 0. What this means is that we can also express the probability model</p>
-<div class="math notranslate nohighlight">
-\[
-y_{i} \sim \mathcal{N}\left(\mu,\sigma^{2}\right)
-\]</div>
-<p>as</p>
-<div class="math notranslate nohighlight">
-\[\begin{split}
-\begin{align*}
-y_{i} &amp;= \mu + \epsilon_{i} \\
-\epsilon_{i} &amp;\sim \mathcal{N}\left(0,\sigma^{2}\right)
-\end{align*}
-\end{split}\]</div>
+<p>So notice that both the <em>errors</em> and the <em>raw data</em> have the same distribution. This is actually a really important concept for statistical modelling, as we will see later on this unit.</p>
 <p>From this perspective, variation in <span class="math notranslate nohighlight">\(y\)</span> can be broken into two sources. The first is the expected value, which influences the <em>scaling</em> of <span class="math notranslate nohighlight">\(y\)</span> and is <em>constant</em> across all the values. The second is the <em>error</em>, which influences the degree to which the data deviates from the expected value. Because the expected value is constant, the randomness in the data comes from the <em>errors</em>. Thus, it is the <em>errors</em> that have a probability distribution. The expected values influence how <em>predictable</em> the data are and the errors influence how <em>unpredictable</em> the data are. In terms of statistical modelling, it is therefore the <em>predictable</em> element we wish to capture.</p>
 </section>
 </section>
@@ -621,7 +622,31 @@ y_{i} &amp;= \mu + \epsilon_{i} \\
 \[
 \text{Var}\left(y\right) = E\left[\left(y - E\left[y\right]\right)^{2}\right]
 \]</div>
-<p>…</p>
+<p>Because this uses the expected value, we need knowledge of the distributions underlying the random variables in this equation. As we know, subtracting the expected value from the data gives us the <em>errors</em>, meaning we can rewrite the variance as</p>
+<div class="math notranslate nohighlight">
+\[
+\text{Var}\left(y\right) = E\left(\epsilon^{2}\right).
+\]</div>
+<p>So the variance is really the expected value of the squared errors. Here we can see how the errors represent the <em>unpredictable</em> part of <span class="math notranslate nohighlight">\(y\)</span> and thus can be used to derive the <em>variance</em>. Indeed, this fits with our concept from earlier, as the errors represent the vertical distanced from the expected value to the raw data. Squaring these values and then averaging them produces our original definition of variance from the start of this lesson. The difference now is that this metric is defined in reference to the assumed distribution of the data and thus is captured by a specific probability model.</p>
+<div class="warning dropdown admonition">
+<p class="admonition-title">Advanced: The Expected Value of the Squared Errors</p>
+<p>To derive the expected value of the squared errors, we need to know its distribution. Statistical theory tells us that this will be a <em>scaled</em> version of the Chi-square distribution, which has the form</p>
+<div class="math notranslate nohighlight">
+\[
+y \sim c \cdot \chi^{2}\left(k\right).
+\]</div>
+<p>In this instance, <span class="math notranslate nohighlight">\(c = \sigma^{2}\)</span> and <span class="math notranslate nohighlight">\(k = 1\)</span>, giving</p>
+<div class="math notranslate nohighlight">
+\[
+\epsilon^{2} \sim \sigma^{2} \cdot \chi^{2}\left(1\right).
+\]</div>
+<p>The expected value of a scaled Chi-square is simply <span class="math notranslate nohighlight">\(ck\)</span>, meaning that</p>
+<div class="math notranslate nohighlight">
+\[
+E\left(\epsilon^{2}\right) = ck = \sigma^{2}.
+\]</div>
+<p>Applying the formal mathematical definition of the expected value further simplifies this to simply taking the <em>average</em> of the squared-errors. As such, the variance of <span class="math notranslate nohighlight">\(y\)</span> is equivalent to the average of the squared-errors. This why the variance is sometimes referred to as the <em>mean squared error</em> (MSE).</p>
+</div>
 <p>Much the same as the expected value, all distributions have some metric of their variance, even if there is not a parameter that directly controls it. The normal distribution is the clearest example because the parameter <span class="math notranslate nohighlight">\(\sigma^{2}\)</span> <em>is</em> the variance. The binomial distribution, on the other hand, has a variance equal to <span class="math notranslate nohighlight">\(np(1-p)\)</span> and the <em>uniform</em> distribution has a variance of <span class="math notranslate nohighlight">\(\frac{1}{2}\left(b-a\right)^{2}\)</span>. This is just to say that the expression for the variance may not be obvious, but it does exist for all distributions. In this way, any distribution can be used a means of describing both the <em>predictable</em> elements of a variable (via the expected value) and the <em>unpredictable</em> elements of a variable (via the variance). Statistical models generally concern themselves with the <em>predictable</em> element, but must take the <em>unpredictable</em> element into account as a metric of uncertainty.</p>
 <p>… The variance can be captured through the errors.</p>
 <aside class="topic">
