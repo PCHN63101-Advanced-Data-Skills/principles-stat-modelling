@@ -379,6 +379,10 @@
 </ul>
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-variance-of-a-distribution">The Variance of a Distribution</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#distributions-as-models-of-the-data-generating-process">Distributions as Models of the Data-generating Process</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-analogy-of-the-shadow">The Analogy of the Shadow</a></li>
+</ul>
+</li>
 </ul>
             </nav>
         </div>
@@ -649,6 +653,13 @@ E\left(\epsilon^{2}\right) = ck = \sigma^{2}.
 </div>
 <p>Much the same as the expected value, all distributions have some metric of their variance, even if there is not a parameter that directly controls it. The normal distribution is the clearest example because the parameter <span class="math notranslate nohighlight">\(\sigma^{2}\)</span> <em>is</em> the variance. The binomial distribution, on the other hand, has a variance equal to <span class="math notranslate nohighlight">\(np(1-p)\)</span> and the <em>uniform</em> distribution has a variance of <span class="math notranslate nohighlight">\(\frac{1}{2}\left(b-a\right)^{2}\)</span>. This is just to say that the expression for the variance may not be obvious, but it does exist for all distributions. In this way, any distribution can be used a means of describing both the <em>predictable</em> elements of a variable (via the expected value) and the <em>unpredictable</em> elements of a variable (via the variance). Statistical models generally concern themselves with the <em>predictable</em> element, but must take the <em>unpredictable</em> element into account as a metric of uncertainty.</p>
 <p>… The variance can be captured through the errors.</p>
+</section>
+<section id="distributions-as-models-of-the-data-generating-process">
+<h2>Distributions as Models of the Data-generating Process<a class="headerlink" href="#distributions-as-models-of-the-data-generating-process" title="Link to this heading">#</a></h2>
+<section id="the-analogy-of-the-shadow">
+<h3>The Analogy of the Shadow<a class="headerlink" href="#the-analogy-of-the-shadow" title="Link to this heading">#</a></h3>
+<p>The concept of variance we were using earlier was purely descriptive. It was a single number that captured what we could see <em>for that specific dataset</em>. Although useful as a means of describing the data, it had no power to either <em>explain</em> or <em>predict</em> the behaviour of <code class="docutils literal notranslate"><span class="pre">mpg</span></code>. Now, we are examining variance as a property of a probability distribution. This can be thought of as <em>theoretical</em> variance. It is a quantity that we do not often known, but must infer from the data we have. We are proposing that this is the value that <em>generated</em> the variability we have observed and thus can use it to both <em>explain</em> and <em>predict</em> the values of <code class="docutils literal notranslate"><span class="pre">mpg</span></code> that we can see. We can think of the variance of the distribution as some object casting a shadow. We cannot see the object, we can only infer what it might look like on the basis of the shadow (i.e. the measured data). This will not be perfect, as a shadow can be distorted and can change, but it will give us some idea of what the object it.</p>
+<p>Once we have an idea of what the object is, we can make predictions about the shapes of <em>all</em> shadows it can cast.</p>
 <aside class="topic">
 <p class="topic-title">Section Summary</p>
 <p>In this section, we have explored the core concept of a <em>random variable</em>. For any experiment, we conceptualise the values we are measuring as realisations of a random variable. This random variable is assumed to have some probability distribution whos shape is controlled by a finite number of parameters. Either directly or indirectly, those parameters determine both the <em>expected value</em> and <em>variance</em> of the distribution. The expected value is the key concern of most statistical models, as this captures some constant universal truth about the data. The variance, on the other hand, captures the degree to which the data does not adhere to the expected value. This can be thought of as splitting the variance in the data into two parts. The first captures some value universal to all the datapoints and the second part captures the errors. It is the errors that represent the randomness in the data and thus it is the errors that have a probability distribution.</p>
@@ -664,6 +675,7 @@ E\left(\epsilon^{2}\right) = ck = \sigma^{2}.
 <p>Note that the <code class="docutils literal notranslate"><span class="pre">rnorm</span></code> function parameterises the normal distribution using the <em>standard deviation</em>, rather than the <em>variance.</em></p>
 </aside>
 </aside>
+</section>
 </section>
 </section>
 
@@ -742,6 +754,10 @@ E\left(\epsilon^{2}\right) = ck = \sigma^{2}.
 </ul>
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-variance-of-a-distribution">The Variance of a Distribution</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#distributions-as-models-of-the-data-generating-process">Distributions as Models of the Data-generating Process</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-analogy-of-the-shadow">The Analogy of the Shadow</a></li>
+</ul>
+</li>
 </ul>
   </nav></div>
 
