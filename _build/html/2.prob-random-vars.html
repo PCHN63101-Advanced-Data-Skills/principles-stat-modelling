@@ -374,12 +374,10 @@
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#continuous-random-variables">Continuous Random Variables</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-expected-value-of-a-distribution">The Expected Value of a Distribution</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#why-is-the-expected-value-important">Why is the Expected Value Important?</a></li>
-</ul>
-</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-expected-value-of-a-distribution">The Expected Value of a Distribution</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-variance-of-a-distribution">The Variance of a Distribution</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#distributions-as-models-of-the-data-generating-process">Distributions as Models of the Data-generating Process</a><ul class="nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#why-are-the-expected-value-and-variance-important">Why are the Expected Value and Variance Important?</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-data-generating-process">The Data-generating Process</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-analogy-of-the-shadow">The Analogy of the Shadow</a></li>
 </ul>
 </li>
@@ -398,7 +396,7 @@
 <h1>Probability and Random Variables<a class="headerlink" href="#probability-and-random-variables" title="Link to this heading">#</a></h1>
 <p>We have now established that <em>variance</em> is the key element of data that we wish to capture. The fact that measured values differ from datapoint-to-datapoint implies an inherent <em>randomess</em> and <em>uncertainty</em> to real-world data. As such, in order to say anything about the variance in our data, we need some means of formalising this randomness. This formalisation comes from the field of <em>probability</em>.</p>
 <div class="tip admonition">
-<p class="admonition-title">Key Concept</p>
+<p class="admonition-title">The Meaning of “Randomness”</p>
 <p>Unlike the common understanding of the term, <em>randomness</em> in probability does not mean completely unstructured and unpredictable. In everyday speech, when we say that something happened “randomly”, that is often taken as meaning that it could not have been predicted. However, in the more formal world of probability, the term <em>random</em> has a very specific definition that means something that is unpredictable in the short term, but has a <em>predictable regularity</em> over the long term. This is captured within the concept of a <em>random variable</em>.</p>
 </div>
 <section id="random-variables">
@@ -546,19 +544,45 @@ y \sim \mathcal{B}\left(n,p\right)
 \[
 E\left(y\right) = np.
 \]</div>
-<p>Why this is true is not especially important for us. Just note that it <em>is</em> true by looking at the Binomial distribution we visualised earlier.</p>
+<p>You can verify this by looking at the distribution we visualised earlier.</p>
 <div class="tip admonition">
 <p class="admonition-title">Equations for the Expected Value</p>
 <p>If you are ever curious, the <a class="reference external" href="https://en.wikipedia.org/wiki/Probability_distribution">Wikipedia pages</a> for all the most common probability distributions contain tables giving the formulas for their various properties, including the mean. For some distributions, the mean is the same as one of the parameters (e.g. the normal distribution, the Poisson distribution), whereas for others the mean is some function of the parameters (e.g. the binomial distribution, the uniform distribution).</p>
 </div>
-<section id="why-is-the-expected-value-important">
-<h3>Why is the Expected Value Important?<a class="headerlink" href="#why-is-the-expected-value-important" title="Link to this heading">#</a></h3>
-<p>The importance of the expected value is that it is not subject to random variation. It is the element of the distribution that does not change across measurements and thus represents some <em>universal truth</em> of the variable in question. In essence, the expected value is the <em>predictable</em> part of the variable. Because of this, we can conceptualise any realisation of a random variable as the expected value plus some random variation</p>
+</section>
+<section id="the-variance-of-a-distribution">
+<h2>The Variance of a Distribution<a class="headerlink" href="#the-variance-of-a-distribution" title="Link to this heading">#</a></h2>
+<p>As well as an expected value, all distributions have some concept of <em>variance</em>. Informally, this captures the <em>width</em> of the distribution and thus dictates the degree to which we expect our measurements to deviate from the expected value, on average. This tells us how <em>consistent</em> the data are with the expected value. Much like the expected value, the variance of a specific distribution is captured using some function of the parameters. In the case of the normal distribution we have</p>
+<div class="math notranslate nohighlight">
+\[
+y \sim \mathcal{N}\left(\mu,\sigma^{2}\right),
+\]</div>
+<p>and the variance is simply</p>
+<div class="math notranslate nohighlight">
+\[
+\text{Var}\left(y\right) = \sigma^{2}.
+\]</div>
+<p>Again, this is fairly obvious. If instead we have</p>
+<div class="math notranslate nohighlight">
+\[
+y \sim \mathcal{B}\left(n,p\right)
+\]</div>
+<p>then the variance of <span class="math notranslate nohighlight">\(y\)</span> turns out to be</p>
+<div class="math notranslate nohighlight">
+\[
+\text{Var}\left(y\right) = np\left(1-p\right),
+\]</div>
+<p>which is much less obvious. Whether the variance is clearly coded in the parameters of the distribution or not, the important point is that <em>all</em> distributions contain some metric of variance.</p>
+</section>
+<section id="why-are-the-expected-value-and-variance-important">
+<h2>Why are the Expected Value and Variance Important?<a class="headerlink" href="#why-are-the-expected-value-and-variance-important" title="Link to this heading">#</a></h2>
+<p>At the beginning of this lesson, we discussed the concept of variance as an informal description of what we could see when we plotted some data. Although useful, this could not be used to <em>explain</em> or <em>predict</em> the data, it just quantified what we already knew. In order to explain and predict the data, we need some mathematical description of the <em>data-generating process</em>. This is precisely what a probability distribution does.</p>
+<p>The importance of the expected value is that it captures the element of the data-generating process that is <em>predictable</em>. The expected value is not subject to random variation, meaning that it is the element of the distribution that <em>does not change</em> across measurements and thus represents some <em>universal truth</em> of the variable in question. Because of this, we can conceptualise any realisation of a random variable as the expected value plus some random variation</p>
 <div class="math notranslate nohighlight">
 \[
 y_{i} = E\left(y\right) + \epsilon_{i}.
 \]</div>
-<p>Here, <span class="math notranslate nohighlight">\(\epsilon_{i}\)</span> is the <span class="math notranslate nohighlight">\(i\)</span>th <em>error</em>, conceptualised as the difference between the value we expected and the actual value of <span class="math notranslate nohighlight">\(y_{i}\)</span>. The importance of this is that most statistical models aim to capture the expect value of the variable in question. This means that the expected value is effectively our primary focus when it comes to building a statistical model.</p>
+<p>Here, <span class="math notranslate nohighlight">\(\epsilon_{i}\)</span> is the <span class="math notranslate nohighlight">\(i\)</span>th <em>error</em>, conceptualised as the difference between the value we expected and the actual value of <span class="math notranslate nohighlight">\(y_{i}\)</span>.</p>
 <div class="tip admonition">
 <p class="admonition-title">Understanding Indices</p>
 <p>This is much the same as typing <code class="docutils literal notranslate"><span class="pre">y[1]</span></code> or <code class="docutils literal notranslate"><span class="pre">y[2]</span></code> in <code class="docutils literal notranslate"><span class="pre">R</span></code>, or using <code class="docutils literal notranslate"><span class="pre">y[i]</span></code> in a loop, where the variable <code class="docutils literal notranslate"><span class="pre">i</span></code> could refer to any index from 1 through to <span class="math notranslate nohighlight">\(n\)</span>.</p>
@@ -579,7 +603,7 @@ y_{1} = \mu + \epsilon_{1} = 2 + 3 = 5.
 y_{2} = \mu + \epsilon_{2} = 2 + -1.5 = 0.5.
 \]</div>
 <p>So notice that there is an element that is <em>constant</em> across measurements and an element that <em>changes</em> with each measurement. In this way, every single value we measure <em>contains</em> the expected value of the distribution.</p>
-<p>The important conclusion from this is that, because the expected value is <em>constant</em>, it cannot be the source of the random variation that we see in real data. Because of this, the randomness must come from the errors. As such, it is <span class="math notranslate nohighlight">\(\epsilon\)</span> that has probabilistic behaviour and we can express the probability model</p>
+<p>The importance of the variance is that it captures the element of the data-generating process that is <em>unpredictable</em>. As we have seen, the expected value is not subject to random variation and thus it is considered <em>constant</em> across the measurements we make. Because of this, the expected value cannot be the source of the random variation that we see in real data. As such, the randomness must come from the errors. It is therefore <span class="math notranslate nohighlight">\(\epsilon\)</span> that has probabilistic behaviour, meaning that we can express the probability model</p>
 <div class="math notranslate nohighlight">
 \[
 y_{i} \sim \mathcal{N}\left(\mu,\sigma^{2}\right)
@@ -592,7 +616,7 @@ y_{i} &amp;= \mu + \epsilon_{i} \\
 \epsilon_{i} &amp;\sim \mathcal{N}\left(0,\sigma^{2}\right)
 \end{align*}
 \end{split}\]</div>
-<p>We can demonstrate this using <code class="docutils literal notranslate"><span class="pre">R</span></code> by removing the expected value from the data. When we do this, all that happens is that we centre the data around 0, as the expectation of all datapoints becomes 0. Importantly, we do not remove any of the randomness. Using <code class="docutils literal notranslate"><span class="pre">mpg</span></code> as an example, we have</p>
+<p>instead. We can demonstrate this in <code class="docutils literal notranslate"><span class="pre">R</span></code> by removing the expected value from the data and visualising the distribution. When we do this, all that happens is that we centre the data around 0, as the expectation of all datapoints becomes 0. However, we do not remove any of the randomness. Using <code class="docutils literal notranslate"><span class="pre">mpg</span></code> as an example, we have</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="nf">par</span><span class="p">(</span><span class="n">mfrow</span><span class="o">=</span><span class="nf">c</span><span class="p">(</span><span class="m">2</span><span class="p">,</span><span class="m">2</span><span class="p">),</span><span class="w"> </span><span class="n">mar</span><span class="o">=</span><span class="nf">c</span><span class="p">(</span><span class="m">5</span><span class="p">,</span><span class="m">5</span><span class="p">,</span><span class="m">2</span><span class="p">,</span><span class="m">2</span><span class="p">))</span>
@@ -614,14 +638,9 @@ y_{i} &amp;= \mu + \epsilon_{i} \\
 <a class="reference internal image-reference" href="_images/054b9e72c8d15c51853b2285190d91a76ada6cbd10ef37e425d880363ba927fa.png"><img alt="_images/054b9e72c8d15c51853b2285190d91a76ada6cbd10ef37e425d880363ba927fa.png" src="_images/054b9e72c8d15c51853b2285190d91a76ada6cbd10ef37e425d880363ba927fa.png" style="width: 840px; height: 480px;" /></a>
 </div>
 </div>
-<p>So notice that both the <em>errors</em> and the <em>raw data</em> have the same distribution. This is actually a really important concept for statistical modelling, as we will see later on this unit.</p>
-<p>From this perspective, variation in <span class="math notranslate nohighlight">\(y\)</span> can be broken into two sources. The first is the expected value, which influences the <em>scaling</em> of <span class="math notranslate nohighlight">\(y\)</span> and is <em>constant</em> across all the values. The second is the <em>error</em>, which influences the degree to which the data deviates from the expected value. Because the expected value is constant, the randomness in the data comes from the <em>errors</em>. Thus, it is the <em>errors</em> that have a probability distribution. The expected values influence how <em>predictable</em> the data are and the errors influence how <em>unpredictable</em> the data are. In terms of statistical modelling, it is therefore the <em>predictable</em> element we wish to capture.</p>
-</section>
-</section>
-<section id="the-variance-of-a-distribution">
-<h2>The Variance of a Distribution<a class="headerlink" href="#the-variance-of-a-distribution" title="Link to this heading">#</a></h2>
-<p>As well as an expected value, all distributions have some concept of <em>variance</em>. Because probability distributions are <em>models</em> of reality, they need to capture the randomness inherent in real-world measurements. We began this lesson by discussing the concept of variance very generally, but now we can start to see how probability distributions formalise this idea. The constant scaling of data is captured by the expected value and the variation around the expected value is captured by the variance. This provides a means of both <em>describing</em> and <em>predicting</em> the behaviour of a random variable.</p>
-<p>Earlier, we used a simplified calculating for the variance. However, the formal definition is as follows:</p>
+<p>So notice that both the <em>errors</em> and the <em>raw data</em> have the same distribution.</p>
+<p>The importance of this is that the errors capture the variance of the distribution. They indicate the degree to which the data deviate from their expectation. From this perspective, variation in <span class="math notranslate nohighlight">\(y\)</span> can be broken into two sources. The first is the expected value, which influences the <em>scaling</em> of <span class="math notranslate nohighlight">\(y\)</span> and is <em>constant</em> across all the values. The second is the <em>error</em>, which influences the degree to which the data deviates from the expected value. Because the expected value is constant, the randomness in the data comes from the <em>errors</em>. Thus, it is the <em>errors</em> that have a probability distribution. The expected values influence how <em>predictable</em> the data are and the errors influence how <em>unpredictable</em> the data are.</p>
+<p>This can all be made clearer by considering the <em>actual</em> formal definition of variance:</p>
 <div class="math notranslate nohighlight">
 \[
 \text{Var}\left(y\right) = E\left[\left(y - E\left[y\right]\right)^{2}\right]
@@ -631,10 +650,10 @@ y_{i} &amp;= \mu + \epsilon_{i} \\
 \[
 \text{Var}\left(y\right) = E\left(\epsilon^{2}\right).
 \]</div>
-<p>So the variance is really the expected value of the squared errors. Here we can see how the errors represent the <em>unpredictable</em> part of <span class="math notranslate nohighlight">\(y\)</span> and thus can be used to derive the <em>variance</em>. Indeed, this fits with our concept from earlier, as the errors represent the vertical distanced from the expected value to the raw data. Squaring these values and then averaging them produces our original definition of variance from the start of this lesson. The difference now is that this metric is defined in reference to the assumed distribution of the data and thus is captured by a specific probability model.</p>
+<p>So the variance is really the expected value of the squared errors. This fits with our concept of variance from earlier, as the errors represent the vertical distanced from the expected value to the raw data. Squaring these values and then averaging them produces our original definition of variance from the start of this lesson. The difference now is that this metric is defined in reference to the assumed distribution of the data and thus is captured by a specific probability model.</p>
 <div class="warning dropdown admonition">
 <p class="admonition-title">Advanced: The Expected Value of the Squared Errors</p>
-<p>To derive the expected value of the squared errors, we need to know its distribution. Statistical theory tells us that this will be a <em>scaled</em> version of the Chi-square distribution, which has the form</p>
+<p>In order to fully derive the expression for the variance above, we need to know the distribution of the squared-errors, in order to understand its expected value. A key point to understand is that manipulating a random variable does not remove the randomness, it just changes it. As such, we manipulate <span class="math notranslate nohighlight">\(y\)</span> to produce <span class="math notranslate nohighlight">\(\epsilon\)</span>, which changes the distribution. We manipulate <span class="math notranslate nohighlight">\(\epsilon\)</span> again to produce <span class="math notranslate nohighlight">\(\epsilon^{2}\)</span>, which changes the distribution. Statistical theory tells us that this will be a <em>scaled</em> version of the Chi-square distribution, which has the form</p>
 <div class="math notranslate nohighlight">
 \[
 y \sim c \cdot \chi^{2}\left(k\right).
@@ -651,11 +670,10 @@ E\left(\epsilon^{2}\right) = ck = \sigma^{2}.
 \]</div>
 <p>Applying the formal mathematical definition of the expected value further simplifies this to simply taking the <em>average</em> of the squared-errors. As such, the variance of <span class="math notranslate nohighlight">\(y\)</span> is equivalent to the average of the squared-errors. This why the variance is sometimes referred to as the <em>mean squared error</em> (MSE).</p>
 </div>
-<p>Much the same as the expected value, all distributions have some metric of their variance, even if there is not a parameter that directly controls it. The normal distribution is the clearest example because the parameter <span class="math notranslate nohighlight">\(\sigma^{2}\)</span> <em>is</em> the variance. The binomial distribution, on the other hand, has a variance equal to <span class="math notranslate nohighlight">\(np(1-p)\)</span> and the <em>uniform</em> distribution has a variance of <span class="math notranslate nohighlight">\(\frac{1}{2}\left(b-a\right)^{2}\)</span>. This is just to say that the expression for the variance may not be obvious, but it does exist for all distributions. In this way, any distribution can be used a means of describing both the <em>predictable</em> elements of a variable (via the expected value) and the <em>unpredictable</em> elements of a variable (via the variance). Statistical models generally concern themselves with the <em>predictable</em> element, but must take the <em>unpredictable</em> element into account as a metric of uncertainty.</p>
-<p>… The variance can be captured through the errors.</p>
 </section>
-<section id="distributions-as-models-of-the-data-generating-process">
-<h2>Distributions as Models of the Data-generating Process<a class="headerlink" href="#distributions-as-models-of-the-data-generating-process" title="Link to this heading">#</a></h2>
+<section id="the-data-generating-process">
+<h2>The Data-generating Process<a class="headerlink" href="#the-data-generating-process" title="Link to this heading">#</a></h2>
+<p>We mentioned above how a probability distribution captured the <em>data-generating process</em>. This is a really important conceptualisation and is worth discussing in a bit more detail, before we move on.</p>
 <section id="the-analogy-of-the-shadow">
 <h3>The Analogy of the Shadow<a class="headerlink" href="#the-analogy-of-the-shadow" title="Link to this heading">#</a></h3>
 <p>The concept of variance we were using earlier was purely descriptive. It was a single number that captured what we could see <em>for that specific dataset</em>. Although useful as a means of describing the data, it had no power to either <em>explain</em> or <em>predict</em> the behaviour of <code class="docutils literal notranslate"><span class="pre">mpg</span></code>. Now, we are examining variance as a property of a probability distribution. This can be thought of as <em>theoretical</em> variance. It is a quantity that we do not often known, but must infer from the data we have. We are proposing that this is the value that <em>generated</em> the variability we have observed and thus can use it to both <em>explain</em> and <em>predict</em> the values of <code class="docutils literal notranslate"><span class="pre">mpg</span></code> that we can see. We can think of the variance of the distribution as some object casting a shadow. We cannot see the object, we can only infer what it might look like on the basis of the shadow (i.e. the measured data). This will not be perfect, as a shadow can be distorted and can change, but it will give us some idea of what the object it.</p>
@@ -749,12 +767,10 @@ E\left(\epsilon^{2}\right) = ck = \sigma^{2}.
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#continuous-random-variables">Continuous Random Variables</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-expected-value-of-a-distribution">The Expected Value of a Distribution</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#why-is-the-expected-value-important">Why is the Expected Value Important?</a></li>
-</ul>
-</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-expected-value-of-a-distribution">The Expected Value of a Distribution</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-variance-of-a-distribution">The Variance of a Distribution</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#distributions-as-models-of-the-data-generating-process">Distributions as Models of the Data-generating Process</a><ul class="nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#why-are-the-expected-value-and-variance-important">Why are the Expected Value and Variance Important?</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-data-generating-process">The Data-generating Process</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-analogy-of-the-shadow">The Analogy of the Shadow</a></li>
 </ul>
 </li>
