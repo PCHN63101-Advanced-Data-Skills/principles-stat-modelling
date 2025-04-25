@@ -370,10 +370,15 @@
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#defining-a-model">Defining a Model</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#parametric-models">Parametric Models</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-analogy-of-the-shadow">The Analogy of the Shadow</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#elements-of-a-model">Elements of a Model</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#elements-of-a-model">Elements of a Model</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-mean-function">The Mean Function</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-variance-function">The Variance Function</a></li>
+</ul>
+</li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-modelling-process">The Modelling Process</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#linear-models-and-the-normal-distribution">Linear Models and the Normal Distribution</a></li>
 </ul>
@@ -389,15 +394,26 @@
                   
   <section class="tex2jax_ignore mathjax_ignore" id="parametric-statistical-models">
 <h1>Parametric Statistical Models<a class="headerlink" href="#parametric-statistical-models" title="Link to this heading">#</a></h1>
-<div class="tip admonition">
-<p class="admonition-title">The Meaning of <em>Parametric</em></p>
-<p>The term <em>parametric</em> is probably familiar to you for describing a certain class of statistical methods. However, the precise meaning of the term is not always appreciated. Within the context we have presented, these methods assume some known probability distribution as representative of their target <em>population</em>. Each measured value is a draw from that distribution and thus is a realisation of some random variable. The shape of the distribution is controlled by a finite number of <em>parameters</em>. Thus, the aim of <em>parametric</em> statistical methods is to estimate the values of the <em>parameters of the population distribution</em>.</p>
-</div>
+<p>In the previous section, we saw how a probability distribution can be used as a <em>model</em> of the data-generating process. We will now take this idea a little further to understand the notion of a <em>parametric statistical model</em>. This is a foundational idea that captures the vast majority of statistical analyses we will learn about on this course. This is the framework upon which we will be building and will provide the structure to see all statistical analyses as part of a very general whole. This is where we take a step away from statistics being a “bag of tricks” and instead view statistical analyses as many specialisations of the same idea.</p>
 <section id="defining-a-model">
 <h2>Defining a Model<a class="headerlink" href="#defining-a-model" title="Link to this heading">#</a></h2>
+<figure class="align-right">
+<a class="reference internal image-reference" href="_images/toy-train.jpg"><img alt="_images/toy-train.jpg" src="_images/toy-train.jpg" style="width: 251.60000000000002px; height: 367.6px;" /></a>
+</figure>
+<p>To begin with, we should make sure we are clear on what a <em>model</em> is. Much like the more general use of the word, a <em>model</em> is a representation of reality, but usually one that represents a <em>simplification</em> of a reality. A model train is not a train, it is a simplified representation of a train. It can perform the basic operations of train (i.e. moving along a track), but it cannot fulfill all the same duties as a real train. Nevertheless, the model capture something <em>fundamental</em> about a train, even if it is not exactly the same.</p>
+<p>In much the same way, a <em>mathematical model</em> is a representation of reality that is a <em>simplification</em> but, we hope, captures something <em>fundamental</em> about reality. In order to do so, the model must be able to explain the data we can observe, but also make predictions that can be tested. We have already seen how a probability distribution can achieve this. We can explain the variation that we see in real data via the distribution’s shape and scale, which are controlled by the expected value and variance of the distribution. We can also make future predictions via reference to the expected value, with the variance telling us how accurate this prediction will be.</p>
+<section id="parametric-models">
+<h3>Parametric Models<a class="headerlink" href="#parametric-models" title="Link to this heading">#</a></h3>
+<p>A parametric statistical model uses a probability distribution to represent the <em>population</em> from which we are sampling data during an experiment. The parameters of this distribution are considered <em>constants</em>. This means that they do not change across different samples and their values are fixed in place. In this way, we see them as representing some ultimate truth of nature<a class="footnote-reference brackets" href="#constant-foot" id="id1" role="doc-noteref"><span class="fn-bracket">[</span>1<span class="fn-bracket">]</span></a>. The general aim of any experiment is then to gather enough samples so that we can estimate these population parameters with some degree of accuracy. Hence, the aim of <em>parametric</em> statistical methods is to estimate the values of the <em>parameters of the population distribution</em>.</p>
+</section>
 <section id="the-analogy-of-the-shadow">
 <h3>The Analogy of the Shadow<a class="headerlink" href="#the-analogy-of-the-shadow" title="Link to this heading">#</a></h3>
-<p>Always remember to heed to words of the famous statistician <a class="reference external" href="https://en.wikipedia.org/wiki/George_E._P._Box">George Box</a>:</p>
+<p>One way of understanding the basic principles of a statistical model is using the analogy of an object casting a shadow. The object is the thing we are most interested in observing, however, we can only learn about its shape and dimensions by studying its shadow. As the sun moves through the sky, the shadow changes. Because of this, each time we study the shadow some elements will be slightly different. Furthermore, the shadow is not a perfect representation of the object, it is distorted and will not be able to represent all the complexity of the object in question. However, if we take enough observations of the shadow we should be able to reach some reasonable conclusions about the object casting the shadow. In this analogy, the object is the population we are trying to study, whereas the shadow is the data we sample.</p>
+<p>Although we cannot directly observe the object, we can learn about it by studying the shadow. However, this is a very difficult task, particularly if the object in question is some complex 3D shape (like a statue or sculpture). In order to make this easier, we make some simplifying assumption about its shape. Say, we assume the object can be represented by a cylinder. This is our <em>model</em> of the object. Much like a probability distribution, we know this is a simplification, but we hope it will be close enough to be <em>useful</em>. By doing so, we reduce what we want to learn about the object to its <em>radius</em> and <em>height</em>, as this is all we need to know to define a cylinder. From there, we use multiple observations of the shadow to estimate what the radius and height might be. Once we are confident we have a good estimate of these parameters, we can complete our model and reach conclusions about how tall and wide the object is.</p>
+<figure class="align-left">
+<a class="reference internal image-reference" href="_images/Some-AI-Nonsense.jpeg"><img alt="_images/Some-AI-Nonsense.jpeg" src="_images/Some-AI-Nonsense.jpeg" style="width: 409.6px; height: 409.6px;" /></a>
+</figure>
+<p>We could, of course, choose a more complex model to represent the object and then learn about more than just the width and height. As we work through this course, much of what we will be learning about is increasing model complexity designed to capturing more subtle elements of the population in question. We will start with simple models and then increae the complexity. In our analogy, this is like going from a basic cylinder to a complex 3D mesh of polygons. With greater complexity comes greater difficulty in estimating the parameters and greater difficulty in understanding the model. However, the aim is to do a better job of capturing the population without making too many simplifications. This is the art of <em>model building</em>. We desire a model that is complex enough to accurately capture the elements of the population that are of most interest, but no more. We do not expect a model to be <em>perfect</em>, but we do want it to be <em>useful</em>, a sentiment echoed in a famous quote by <a class="reference external" href="https://en.wikipedia.org/wiki/George_E._P._Box">George Box</a>.</p>
 <blockquote class="epigraph">
 <div><p>All models are wrong, but some are useful.</p>
 <p class="attribution">—George E. P. Box</p>
@@ -406,6 +422,11 @@
 </section>
 <section id="elements-of-a-model">
 <h2>Elements of a Model<a class="headerlink" href="#elements-of-a-model" title="Link to this heading">#</a></h2>
+<section id="the-mean-function">
+<h3>The Mean Function<a class="headerlink" href="#the-mean-function" title="Link to this heading">#</a></h3>
+</section>
+<section id="the-variance-function">
+<h3>The Variance Function<a class="headerlink" href="#the-variance-function" title="Link to this heading">#</a></h3>
 <p>The fundamental elements of parametric statistical model are therefore:</p>
 <ul class="simple">
 <li><p>An assumed probability distribution for the data</p></li>
@@ -418,6 +439,7 @@
 y_{i} \sim \mathcal{N}\left(\mu,\sigma\right)
 \]</div>
 <p>The mean of the distribution defines a degree of <em>structure</em> within the data, whereas the variance term captures the degree to which the data differs from this structure. For instance, the <em>mean</em> is a very simple model that captures the structure of the data in terms of its <em>scaling</em>. We can think of the mean as capturing the <em>constant offset from 0</em> inherent in the units of the data. Without any other information, this is the most we can say.</p>
+</section>
 </section>
 <section id="the-modelling-process">
 <h2>The Modelling Process<a class="headerlink" href="#the-modelling-process" title="Link to this heading">#</a></h2>
@@ -495,6 +517,13 @@ y_{i} \sim \mathcal{N}\left(\mu,\sigma^{2}\right)
 <p class="topic-title">Section Summary</p>
 <p>In this section, we have explored the general framework under which the vast majority of analyses in this course will be based.</p>
 </aside>
+<hr class="footnotes docutils" />
+<aside class="footnote-list brackets">
+<aside class="footnote brackets" id="constant-foot" role="note">
+<span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id1">1</a><span class="fn-bracket">]</span></span>
+<p>This may seem a bit of a stretch, as you might think it would be more reasonable to assume that the parameters of a population may shift around over time. This is actually one of the assumptions that differs between classical and Bayesian methods, as we will see later on the course. However, referring back to the idea of a <em>model</em>, this is a useful simplification that serves to make the mathematics easier and the model more tractable.</p>
+</aside>
+</aside>
 </section>
 </section>
 
@@ -564,10 +593,15 @@ y_{i} \sim \mathcal{N}\left(\mu,\sigma^{2}\right)
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#defining-a-model">Defining a Model</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#parametric-models">Parametric Models</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-analogy-of-the-shadow">The Analogy of the Shadow</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#elements-of-a-model">Elements of a Model</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#elements-of-a-model">Elements of a Model</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-mean-function">The Mean Function</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-variance-function">The Variance Function</a></li>
+</ul>
+</li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-modelling-process">The Modelling Process</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#linear-models-and-the-normal-distribution">Linear Models and the Normal Distribution</a></li>
 </ul>
