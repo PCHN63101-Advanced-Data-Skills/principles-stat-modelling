@@ -649,13 +649,13 @@ E\left(y_{i}|x_{i1}\right) = n \times p_{i} = n \times \frac{1}{1 + e^{-\left(\b
 </section>
 <section id="component-3-the-variance-function">
 <h2>Component 3: The Variance Function<a class="headerlink" href="#component-3-the-variance-function" title="Link to this heading">#</a></h2>
-<p>Much like the mean function, in order to connect the variance of the assumed population distribution to the predictor variables, we define a <em>variance function</em>. The purpose of the variance function is to indicate how the uncertainty around the mean of the distribution changes in relation to the values of the predictor variables. An obvious example would be if our predictor variable related to two experimental groups and we want to assume both a different <em>mean</em> and different <em>variance</em> across the groups. Another example would be if we wanted to capture the variance changing as a function of some continuous predictor variable.</p>
-<p>Like the mean function, we can write the variance function as <span class="math notranslate nohighlight">\(\text{Var}\left(y_{i}|\mathbf{x}_{i}\right)\)</span>. The simplest situation is when we just assume a constant variance for all values of <span class="math notranslate nohighlight">\(y\)</span>, giving a variance function of</p>
+<p>Much like the mean function, in order to connect the variance of the assumed population distribution to the predictor variables, we define a <em>variance function</em>. The purpose of the variance function is to indicate how the uncertainty around the mean of the distribution changes in relation to the values of the predictor variables. An obvious example would be if our predictor variable related to two experimental groups and we want to assume both a different <em>mean</em> and different <em>variance</em> across the groups. Another example would be if we wanted to capture the variance changing as a function of some continuous predictor variable. Like the mean function, we can express the variance function formally as <span class="math notranslate nohighlight">\(\text{Var}\left(y_{i}|\mathbf{x}_{i}\right)\)</span>. This is read as the variance of <span class="math notranslate nohighlight">\(y_{i}\)</span> <em>after</em> taking the values of the predictor variables into account. Using the <code class="docutils literal notranslate"><span class="pre">mtcars</span></code> example, this would be the variance of <code class="docutils literal notranslate"><span class="pre">mpg</span></code> after taking the values of <code class="docutils literal notranslate"><span class="pre">wt</span></code> and <code class="docutils literal notranslate"><span class="pre">hp</span></code> into account.</p>
+<p>Similar to the mean function, the simplest situation is when we just assume a constant variance for all values of <span class="math notranslate nohighlight">\(y\)</span>. This gives a variance function of</p>
 <div class="math notranslate nohighlight">
 \[
-\text{Var}\left(y_{i}|\mathbf{x}_{i}\right) = \sigma^{2}.
+\text{Var}\left(y_{i}|\mathbf{x}_{i}\right) = \sigma^{2},
 \]</div>
-<p>If we also assumed a constant mean then the full probability model for a single predictor would be</p>
+<p>meaning that, irrespective of the values of the predictor variables, the variance of <span class="math notranslate nohighlight">\(y\)</span> is assumes to be the same for every observation. If we also assumed a constant mean then the full probability model for a single predictor would be</p>
 <div class="math notranslate nohighlight">
 \[\begin{split}
 \begin{align*}
@@ -683,7 +683,7 @@ y_{i} \sim \mathcal{N}\left(\mu,\sigma^{2}\right),
 \[
 \text{Var}\left(y_{i}|x_{i1}\right) = \sigma^{2}_{i} = \frac{\sigma^{2}}{x_{i1}}.
 \]</div>
-<p>This would cause the width of the population distribution to <em>decrease</em> as weight increased. For instance, perhaps at higher values the weight of the car becomes the primary factor that determines MPG. As such, any other factors that cause greater variability across cars at lower weights start to become less influential the heavier the car becomes. This is not necessarily what we see within this dataset (and this is not necessarily a very good variance function), but hopefully the principle is clear. This particular case is illustrated in the interactive 3D plot below. Notice how the width of the distributions change as weight increases.</p>
+<p>This would cause the width of the population distribution to <em>decrease</em> as weight increased. For instance, perhaps at higher values the weight of the car becomes the primary factor that determines MPG. As such, any other factors that cause greater variability across cars at lower weights start to become less influential the heavier the car becomes. This is not necessarily what we see within this dataset (and this is not necessarily a very good variance function), but hopefully the principle is clear. This particular case is illustrated in the interactive 3D plot below. Move the viewpoint around to see how the width of the distributions <em>decreases</em> as weight increases.</p>
 <div class="cell tag_remove-input docutils container">
 <div class="cell_output docutils container">
 <div class="output text_html"><!doctype html>
@@ -721,15 +721,6 @@ y_{i} \sim \mathcal{N}\left(\mu,\sigma^{2}\right),
 </html>
 </div></div>
 </div>
-<p>As another example, if <span class="math notranslate nohighlight">\(x_{i1}\)</span> coded some form of <em>group membership</em> where <span class="math notranslate nohighlight">\(x_{i1} = 0\)</span> was associated with all the data from the first group and <span class="math notranslate nohighlight">\(x_{i1} = 1\)</span> was associated with all the data from the second group, we could have a variance function of the form</p>
-<div class="math notranslate nohighlight">
-\[\begin{split}
-\begin{align*}
-    \text{Var}\left(y_{i}|x_{i1} = 0\right) &amp;= \sigma^{2}_{1} \\
-    \text{Var}\left(y_{i}|x_{i1} = 1\right) &amp;= \sigma^{2}_{2}.
-\end{align*}
-\end{split}\]</div>
-<p>Here, each group is given its own variance term and thus we allow the width of the distribution to change depending upon the experimental grouping. This is a more useful variance function in theory, as it may be unreasonable to think that two distinct groups (such as patients and controls) would have the same degree of variability in measurements. However, this can be deceptively tricky to actually apply in practise. In addition, the variance function can also be used to define any <em>correlation</em> between different values of <span class="math notranslate nohighlight">\(y\)</span>, for instance, in cases of repeated measurements from the same subject. However, this is an additional complexity we will leave to one side until we reach the topic of <em>mixed-effects models</em> later in the course.</p>
 <div class="tip admonition">
 <p class="admonition-title">The Variance Function as the <em>Unpredictable</em> Element</p>
 <p>Again, thinking back to our previous discussion, if the mean function captures the predictable element of our random variable, then the variance function captures the <em>unpredictable</em> element. In effect, the variance function seeks to capture the <em>structure</em> of the model errors. This involves capturing all the reasons why the data does not conform to the expected value. In the simplest case, we can just assume that there is a constant degree of non-conformity, irrespective of the value of any of the predictor variables. In other words, the variance function just produces a single value. In more complex cases, the predictor variables can be used to dictate a more complex structure, including difference variances for different data groupings or some form of correlational structure.</p>
