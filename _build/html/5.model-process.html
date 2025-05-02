@@ -384,10 +384,7 @@ document.write(`
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#model-parameters">Model Parameters</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-steps-of-modelling">The Steps of Modelling</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#separating-specification-from-estimation-and-inference">Separating Specification from Estimation and Inference</a></li>
-</ul>
-</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-steps-of-modelling">The Steps of Modelling</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#models-in-theory-vs-models-in-practice">Models in Theory vs Models in Practice</a></li>
 </ul>
             </nav>
@@ -409,13 +406,13 @@ document.write(`
 <p>The parameters of the model represent those quantities that are <em>unknown</em>. Typically, these are taken as constants that relate to the population distribution. For instance, take the simple regression model</p>
 <div class="math notranslate nohighlight">
 \[\begin{split}
-\begin{align*}
-    y_{i}|x_{i1}                        &amp;\sim \mathcal{N}\left(\mu_{i},\sigma^{2}_{i}\right) \\
-    E\left(y_{i}|x_{i1}\right)          &amp;= \mu_{i} = \beta_{0} + \beta_{1}x_{i1}             \\
-    \text{Var}\left(y_{i}|x_{i1}\right) &amp;= \sigma^{2}_{i} = \sigma^{2}.
-\end{align*}
+\begin{array}{rlr}
+  y_{i}|x_{i1}                        &amp;\sim \mathcal{N}\left(\mu_{i},\sigma^{2}_{i}\right)  &amp; \text{(Population distribution)} \\
+  E\left(y_{i}|x_{i1}\right)          &amp;= \mu_{i} = \beta_{0} + \beta_{1}x_{i1}              &amp; \text{(Mean function)} \\
+  \text{Var}\left(y_{i}|x_{i1}\right) &amp;= \sigma^{2}_{i} = \sigma^{2}                        &amp; \text{(Variance function)}
+\end{array}
 \end{split}\]</div>
-<p>At the level of the population distribution, there are two parameters for every <span class="math notranslate nohighlight">\(i\)</span>th value of <span class="math notranslate nohighlight">\(y\)</span>, namely <span class="math notranslate nohighlight">\(\mu_{i}\)</span> and <span class="math notranslate nohighlight">\(\sigma^{2}_{i}\)</span>. This might imply that there are <span class="math notranslate nohighlight">\(2n\)</span> parameters in this model (<span class="math notranslate nohighlight">\(\mu_{1}, \mu_{2}, \dots, \mu_{n}, \sigma^{2}_{1}, \sigma^{2}_{2}, \dots, \sigma^{2}_{n}\)</span>). However, the mean function clarifies that each value of <span class="math notranslate nohighlight">\(\mu_{i}\)</span> is actually a combination of two constants (<span class="math notranslate nohighlight">\(\beta_{0},\beta_{1}\)</span>) and the <span class="math notranslate nohighlight">\(i\)</span>th value of the predictor <span class="math notranslate nohighlight">\(x_{i1}\)</span>. Similarly, the variance function clarifies that each value of <span class="math notranslate nohighlight">\(\sigma^{2}_{i}\)</span> is the same number. As such, this model actually contains <em>three</em> parameters (<span class="math notranslate nohighlight">\(\beta_{0}, \beta_{1}, \sigma^{2}\)</span>). These are the only unknown values in the model. This can be clarified by simplifying the model to its standard form</p>
+<p>At the level of the population distribution, there are two parameters for every <span class="math notranslate nohighlight">\(i\)</span>th value of <span class="math notranslate nohighlight">\(y\)</span> (<span class="math notranslate nohighlight">\(\mu_{i}\)</span>, <span class="math notranslate nohighlight">\(\sigma^{2}_{i}\)</span>). This implies that there are <span class="math notranslate nohighlight">\(2n\)</span> parameters in this model (<span class="math notranslate nohighlight">\(\mu_{1}, \mu_{2}, \dots, \mu_{n}, \sigma^{2}_{1}, \sigma^{2}_{2}, \dots, \sigma^{2}_{n}\)</span>). However, the mean function clarifies that each value of <span class="math notranslate nohighlight">\(\mu_{i}\)</span> is actually a combination of two constants (<span class="math notranslate nohighlight">\(\beta_{0},\beta_{1}\)</span>) and the <span class="math notranslate nohighlight">\(i\)</span>th value of the predictor <span class="math notranslate nohighlight">\(x_{i1}\)</span>. Similarly, the variance function clarifies that each value of <span class="math notranslate nohighlight">\(\sigma^{2}_{i}\)</span> is actually the same number. As such, this model actually contains <em>three</em> parameters (<span class="math notranslate nohighlight">\(\beta_{0}, \beta_{1}, \sigma^{2}\)</span>). These are the only unknown values in the model and capture everything we need to know about the random variable <span class="math notranslate nohighlight">\(y\)</span>. We can think of this as a <em>simplification</em> process, where the core information in the <span class="math notranslate nohighlight">\(n\)</span> data points across both <span class="math notranslate nohighlight">\(y\)</span> and <span class="math notranslate nohighlight">\(x\)</span> can be captured by only 3 numbers. This can be clarified by simplifying the model to its standard form</p>
 <div class="math notranslate nohighlight">
 \[
 y_{i} \sim \mathcal{N}\left(\beta_{0} + \beta_{1}x_{i1}, \sigma^{2}\right),
@@ -432,17 +429,21 @@ y_{i} \sim \mathcal{N}\left(\beta_{0} + \beta_{1}x_{i1}, \sigma^{2}\right),
 </figcaption>
 </figure>
 <p>The general steps in building a model are shown in <a class="reference internal" href="#model-flowchart-fig"><span class="std std-numref">Fig. 1</span></a>. As we can see, the process can be split into three steps. The first is <em>model specification</em>, where the population distribution is decided, along with a suitable mean and variance function. The second is <em>model estimation</em>, where the parameters that define the mean and variance functions are estimated, using some data. The outcome is a set of estimated values for the parameters, as well as some metric of the uncertainty of the estimation process. The final step is <em>inference</em>, where the parameter estimates and their uncertainty are combined to create <em>test-statistics</em> which are used to reach conclusions on the basis of <em>hypothesis</em> tests about the population values of the parameters.</p>
-<section id="separating-specification-from-estimation-and-inference">
-<h3>Separating Specification from Estimation and Inference<a class="headerlink" href="#separating-specification-from-estimation-and-inference" title="Link to this heading">#</a></h3>
-<p>Given the steps shown in <a class="reference internal" href="#model-flowchart-fig"><span class="std std-numref">Fig. 1</span></a>, this lesson has focussed primarily on <em>model specification</em>. Next week, we will be looking at simple and multiple linear regression. In doing so, we will discuss both <em>model estimation</em> and <em>inference</em>, within a regression context. One particular reason for splitting these topics up is that model <em>specification</em> is a generic process that is applicable across many different contexts. For instance, both traditional statistical methods and Bayesian methods agree on this element of modelling. However, where methods disagree is usual in terms of the methods of <em>estimation</em> and the apporoaches to <em>inference</em>. As such, it is useful to draw a conceptual line between these topics and just focus on <em>specification</em> for the moment.</p>
-</section>
+<p>Given the steps shown in <a class="reference internal" href="#model-flowchart-fig"><span class="std std-numref">Fig. 1</span></a>, this lesson has focussed primarily on <em>model specification</em>. In the next lesson, we will be looking at simple and multiple linear regression and will discuss both <em>model estimation</em> and <em>inference</em>. One particular reason for splitting these topics up is that model <em>specification</em> is a generic process that is applicable across many different contexts. For instance, both traditional statistical methods and Bayesian methods agree on this element of modelling. However, where methods disagree is usually in terms of the methods of <em>estimation</em> and <em>inference</em>. As such, it is useful to draw a conceptual line between these topics and just focus on <em>specification</em> for the moment.</p>
 </section>
 <section id="models-in-theory-vs-models-in-practice">
 <h2>Models in Theory vs Models in Practice<a class="headerlink" href="#models-in-theory-vs-models-in-practice" title="Link to this heading">#</a></h2>
-<p>Although we have presented a very flexible framework within this lesson, the reality is that we very rarely get to choose our own population distribution, mean function and variance function. Instead, we have a corpus of pre-specified models to choose from. This is largely because models need to be <em>tractable</em> and <em>practical</em>, particularly in terms of parameter estimation and statistical inference. As such, the framework we have presented is largely there for <em>understanding</em> the models that already exist, rather than as a framework for building brand new models. The degree of flexibility required to have full control over all the model elements is usually only practical within a Bayesian framework, wheres Frequentist methods are much more restrictive. As such, it is important to recognise that we will be working with models where the population distribution, mean function and variance function have already been decided for us. Our job is simply to make a choice in terms of which model will work better for us in any given situation. As we will come to learn, this framework encompasses regression, ANOVA, ANCOVA and a host of more complex methods. In general, these methods only differ by their precise form of mean function and/or variance function. As such, this framework is helpful for understanding all the ways that these approaches differ, as well as all the ways that they are <em>the same</em>.</p>
+<p>As a final discussion before we finish, it is important to understand the distinction between the theoretical framework we have presented here and the reality of building statistical models. Although this framework appears very flexible, the reality is that we very rarely get to choose our own population distribution, mean function and variance function. Instead, we have a corpus of pre-specified models to choose from. This is largely because models need to be <em>tractable</em> and <em>practical</em>, particularly in terms of parameter estimation and statistical inference. As such, the framework we have presented is largely there for <em>understanding</em> the models that already exist, rather than as a framework for building brand new models. The degree of flexibility required to have full control over all the model elements is usually only possible within a Bayesian framework, wheres Frequentist methods are much more restrictive. As such, it is important to recognise that we will be working with models where the population distribution, mean function and variance function have already been decided for us. Our job is simply to make a choice in terms of which model will work best for us in any given situation. As we will come to learn, this encompasses regression, ANOVA, ANCOVA and a host of more complex methods. This framework is therefore helpful for understanding all the ways that these approaches differ, as well, most importantly, all the ways that they are <em>the same</em>.</p>
 <aside class="topic">
-<p class="topic-title">Section Summary</p>
-<p>In this section, we have explored the general framework under which the vast majority of analyses in this course will be based.</p>
+<p class="topic-title">What do you now know?</p>
+<p>In this section, we have explored the <em>modelling process</em> used to build statistical models during a data analysis. After reading this section, you should have a good sense of:</p>
+<ul class="simple">
+<li><p>What the <em>parameters</em> of a model are and how they can be used to <em>summarise</em> and <em>simplify</em> the relationships within a data set.</p></li>
+<li><p>The idea that the model parameters are <em>of most interest</em> in terms of their values, both for <em>interpretation</em> and <em>inference</em>.</p></li>
+<li><p>The steps involved in building a model, specifically in terms of <em>specification</em>, <em>estimation</em> and <em>inference</em>.</p></li>
+<li><p>The notion that most statistical methods are the <em>same</em> when it comes to model <em>specification</em>, but that differences come from both <em>estimation</em> and approaches to <em>inference</em>.</p></li>
+<li><p>The fact that, in practise, we rarely build models up by fully specifying the population distribution, mean function and variance function. Instead, we used pre-existing models where these elements have already been fixed in order to make sure a model is <em>tractable</em> and <em>practical</em>. For instance, simply linear regression pre-supposed a normal population distribution, with a mean function given by the regression equation and a constant variance.</p></li>
+</ul>
 </aside>
 </section>
 </section>
@@ -512,10 +513,7 @@ y_{i} \sim \mathcal{N}\left(\beta_{0} + \beta_{1}x_{i1}, \sigma^{2}\right),
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#model-parameters">Model Parameters</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-steps-of-modelling">The Steps of Modelling</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#separating-specification-from-estimation-and-inference">Separating Specification from Estimation and Inference</a></li>
-</ul>
-</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-steps-of-modelling">The Steps of Modelling</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#models-in-theory-vs-models-in-practice">Models in Theory vs Models in Practice</a></li>
 </ul>
   </nav></div>
