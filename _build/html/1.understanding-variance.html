@@ -16,30 +16,33 @@
     document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
     document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
   </script>
+  <!--
+    this give us a css class that will be invisible only if js is disabled
+  -->
+  <noscript>
+    <style>
+      .pst-js-only { display: none !important; }
+
+    </style>
+  </noscript>
   
   <!-- Loaded before other Sphinx assets -->
-  <link href="_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
-<link href="_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
-<link href="_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link href="_static/styles/theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+<link href="_static/styles/pydata-sphinx-theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
 
-  
-  <link href="_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
-  <link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
-<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
-<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
-
-    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=b76e3c8a" />
-    <link rel="stylesheet" type="text/css" href="_static/styles/sphinx-book-theme.css?v=eba8b062" />
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="_static/styles/sphinx-book-theme.css?v=a3416100" />
     <link rel="stylesheet" type="text/css" href="_static/togglebutton.css?v=13237357" />
     <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
     <link rel="stylesheet" type="text/css" href="_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
     <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css?v=4fa983c6" />
     <link rel="stylesheet" type="text/css" href="_static/sphinx-design.min.css?v=95c83b7e" />
   
+  <!-- So that users can add custom icons -->
+  <script src="_static/scripts/fontawesome.js?digest=8878045cc6db502f8baf"></script>
   <!-- Pre-loaded scripts that we'll load fully later -->
-  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
-<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
-  <script src="_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf" />
+<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf" />
 
     <script src="_static/documentation_options.js?v=9eb32ce0"></script>
     <script src="_static/doctools.js?v=9a2dae69"></script>
@@ -66,6 +69,7 @@
     <link rel="prev" title="Introduction" href="0.intro.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
+  <meta name="docsearch:version" content="" />
   </head>
   
   
@@ -81,19 +85,8 @@
     <i class="fa-solid fa-arrow-up"></i>Back to top</button>
 
   
-  <input type="checkbox"
-          class="sidebar-toggle"
-          id="pst-primary-sidebar-checkbox"/>
-  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
-  
-  <input type="checkbox"
-          class="sidebar-toggle"
-          id="pst-secondary-sidebar-checkbox"/>
-  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
-  
-  <div class="search-button__wrapper">
-    <div class="search-button__overlay"></div>
-    <div class="search-button__search-container">
+  <dialog id="pst-search-dialog">
+    
 <form class="bd-search d-flex align-items-center"
       action="search.html"
       method="get">
@@ -101,7 +94,6 @@
   <input type="search"
          class="form-control"
          name="q"
-         id="search-input"
          placeholder="Search this book..."
          aria-label="Search this book..."
          autocomplete="off"
@@ -109,8 +101,8 @@
          autocapitalize="off"
          spellcheck="false"/>
   <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
-</form></div>
-  </div>
+</form>
+  </dialog>
 
   <div class="pst-async-banner-revealer d-none">
   <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
@@ -126,7 +118,8 @@
       
       
       
-      <div class="bd-sidebar-primary bd-sidebar">
+      <dialog id="pst-primary-sidebar-modal"></dialog>
+      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar">
         
 
   
@@ -156,21 +149,17 @@
     
     
     <img src="_static/logo.png" class="logo__image only-light" alt="The Principles of Statistical Modelling - Home"/>
-    <script>document.write(`<img src="_static/logo.png" class="logo__image only-dark" alt="The Principles of Statistical Modelling - Home"/>`);</script>
+    <img src="_static/logo.png" class="logo__image only-dark pst-js-only" alt="The Principles of Statistical Modelling - Home"/>
   
   
 </a></div>
         <div class="sidebar-primary-item">
 
- <script>
- document.write(`
-   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
-    <i class="fa-solid fa-magnifying-glass"></i>
-    <span class="search-button__default-text">Search</span>
-    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
-   </button>
- `);
- </script></div>
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button></div>
         <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
     <div class="bd-toc-item navbar-nav active">
         
@@ -196,9 +185,14 @@
   
   
   <div class="sidebar-primary-items__end sidebar-primary__section">
+      <div class="sidebar-primary-item">
+<div id="ethical-ad-placement"
+      class="flat"
+      data-ea-publisher="readthedocs"
+      data-ea-type="readthedocs-sidebar"
+      data-ea-manual="true">
+</div></div>
   </div>
-  
-  <div id="rtd-footer-container"></div>
 
 
       </div>
@@ -342,24 +336,16 @@
 
 
 
-<script>
-document.write(`
-  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
-    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
-    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
-    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
-  </button>
-`);
-</script>
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
+</button>
 
 
-<script>
-document.write(`
-  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+<button class="btn btn-sm pst-navbar-icon search-button search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
     <i class="fa-solid fa-magnifying-glass fa-lg"></i>
-  </button>
-`);
-</script>
+</button>
 <button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
     <span class="fa-solid fa-list"></span>
 </button>
@@ -403,18 +389,12 @@ document.write(`
                   
   <section class="tex2jax_ignore mathjax_ignore" id="understanding-variance">
 <h1>Understanding Variance<a class="headerlink" href="#understanding-variance" title="Link to this heading">#</a></h1>
-<p>The key insight that we want you to achieve on this course is that statistics is a science concerned with building <em>models</em> of data. Although your prior experiences may have left the impression that statistics is about <em>hypothesis tests</em>, the reality is that this is a very narrow and unhelpful perspective. The concept of a data analysis being an exercise in <em>model building</em> is fundamental to a much deeper understanding of statistics, and is fundamental to your success on the rest of this course. To facilitate this, we will start with some core principles that are essential for developing an intuitive understanding of statistical models. Perhaps more than any other concept in statistics, the idea of <em>variance</em> is essential for understanding the purpose of a statistical model.</p>
+<p>Statistics is a branch of science concerned with understanding uncertainty of measurements through the building of <em>models</em>. Although your prior experiences may have left the impression that statistics is about <em>hypothesis tests</em>, the reality is that this is a very narrow perspective. The concept of a data analysis being an exercise in <em>model building</em> is fundamental to a much deeper understanding of statistics, and is fundamental to your success on the rest of this course. To facilitate this, we will start with some core principles that are essential for developing an intuitive understanding of statistical models. Perhaps more than any other concept in statistics, the idea of <em>variance</em> is essential for understanding what purpose a statistical model serves.</p>
 <section id="defining-variance">
 <h2>Defining Variance<a class="headerlink" href="#defining-variance" title="Link to this heading">#</a></h2>
-<p>Variance is, in many ways, the basic currency of statistics. It is the fundamental information that data holds and is the feature of data that all statistical models aim to capture. Variance is therefore a very important concept and so we need to be clear on what <em>exactly</em> variance is.</p>
-<p>Informally, the idea of variance is very simple. For a given set of data, we want to understand the reason why the measured values are different from each other. In other words, why does the data <em>vary</em>? If data did not vary, it would be constant. Every time we took a measurement we would get the same value. In this scenario, the data would be <em>perfectly predictable</em> and there would be no need for statistics.</p>
+<p>Variance is the basic currency of statistics. It is the fundamental information that data holds and is the feature of data that all statistical models aim to capture. Variance is therefore a very important concept and so we need to be clear on what <em>exactly</em> variance is. Informally, the idea of variance is very simple. For a given set of data, we want to understand the reason why the measured values are different from each other. In other words, why does the data <em>vary</em>? If data did not vary, it would be constant. Every time we took a measurement we would get the same value. In this scenario, the data would be <em>perfectly predictable</em> and there would be no need for statistics.</p>
 <p>As an example, consider the plot of all the measurements of <code class="docutils literal notranslate"><span class="pre">mpg</span></code> from the <code class="docutils literal notranslate"><span class="pre">mtcars</span></code> dataset<a class="footnote-reference brackets" href="#foot1" id="id1" role="doc-noteref"><span class="fn-bracket">[</span>1<span class="fn-bracket">]</span></a> shown below. Clearly, the values of <code class="docutils literal notranslate"><span class="pre">mpg</span></code> differ from car-to-car. This is expected, but take a moment to consider <em>why</em> this is the case?</p>
-<div class="cell tag_hide-input docutils container">
-<details class="hide above-input">
-<summary aria-label="Toggle hidden content">
-<span class="collapsed">Show code cell source</span>
-<span class="expanded">Hide code cell source</span>
-</summary>
+<div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="nf">data</span><span class="p">(</span><span class="s">&#39;mtcars&#39;</span><span class="p">)</span>
 <span class="nf">par</span><span class="p">(</span><span class="n">cex.lab</span><span class="o">=</span><span class="m">1.3</span><span class="p">,</span><span class="w"> </span><span class="n">cex.axis</span><span class="o">=</span><span class="m">1.1</span><span class="p">,</span><span class="w"> </span><span class="n">cex</span><span class="o">=</span><span class="m">1.4</span><span class="p">)</span><span class="w"> </span><span class="c1"># plot scaling</span>
@@ -422,27 +402,18 @@ document.write(`
 </pre></div>
 </div>
 </div>
-</details>
 <div class="cell_output docutils container">
-<a class="reference internal image-reference" href="_images/f1a077f549c57e9d52a2ead25a341b463c5591bd71e8faf44765ef8470dad5c7.png"><img alt="_images/f1a077f549c57e9d52a2ead25a341b463c5591bd71e8faf44765ef8470dad5c7.png" src="_images/f1a077f549c57e9d52a2ead25a341b463c5591bd71e8faf44765ef8470dad5c7.png" style="width: 840px; height: 480px;" /></a>
+<a class="reference internal image-reference" href="_images/d03b66767ccf4313775bf6c0f1fa3ed57fbc7809374b034c5571025142246ed7.png"><img alt="_images/d03b66767ccf4313775bf6c0f1fa3ed57fbc7809374b034c5571025142246ed7.png" src="_images/d03b66767ccf4313775bf6c0f1fa3ed57fbc7809374b034c5571025142246ed7.png" style="width: 720px; height: 420px;" /></a>
 </div>
 </div>
-<div class="tip dropdown admonition">
-<p class="admonition-title">Why do different cars have different MPG values?</p>
 <p>The most obvious answer here is that cars have different properties, such as their weight or their engine size. However, there will also be a degree of natural variation due to limitations in the precision of measurement. Importantly, some of these sources we can measures, whereas others we cannot. This is an important distinction within statistics and is sometimes known as <em>reducible</em> versus <em>irriducible</em> error.</p>
-</div>
 <p>Considering the different sources of the variation in <code class="docutils literal notranslate"><span class="pre">mpg</span></code> is the first step towards building a statistical model. Indeed, thinking about the problem and considering various possibilities is one of the first things an analyst should do when presented with a new dataset. By doing so, you are starting to build your own mental model of the observed variance. All statistics does is allow this process to be formalised.</p>
 </section>
 <section id="measuring-variance">
 <h2>Measuring Variance<a class="headerlink" href="#measuring-variance" title="Link to this heading">#</a></h2>
-<p>In order to start understanding the variance we can observe, we need some way of <em>quantifying</em> it. As mentioned above, our question is really about how far any set of data are from being <em>constant</em>. If we consider this to be the definition of <em>no variance</em>, then our measure must capture how far away our data are from a constant state. But what constant value should we pick for the comparisons? We could select something arbitrary (e.g. 0, 100, 1000), however (for reasons we will justify further below) the better choice is to use <em>the mean</em>.</p>
-<p>To see this visually, the mean value of <code class="docutils literal notranslate"><span class="pre">mpg</span></code> is indicated as a horizontal line in the plot below. This provides our <em>yardstick</em> to measure variation against.</p>
-<div class="cell tag_hide-input docutils container">
-<details class="hide above-input">
-<summary aria-label="Toggle hidden content">
-<span class="collapsed">Show code cell source</span>
-<span class="expanded">Hide code cell source</span>
-</summary>
+<p>In order to start understanding the variance we can observe, we need some way of <em>quantifying</em> it. As mentioned above, our question is really about how far any set of data are from being <em>constant</em>. If we consider this to be the definition of <em>no variance</em>, then our measure must capture how far away our data are from a constant state. But what constant value should we pick for the comparisons? We could select something arbitrary (e.g. 0, 100, 1000), however the better choice is to use <em>the mean</em>. Because the mean is, by definition, the closest point to <em>all</em> the data, it will yield the smallest measure of variance and thus will provide the best metric for determining how close the data are to constant.</p>
+<p>To see this visually, the mean value of <code class="docutils literal notranslate"><span class="pre">mpg</span></code> is visualised as a horizontal line in the plot below. This provides our <em>yardstick</em> for measuring variation against.</p>
+<div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="nf">par</span><span class="p">(</span><span class="n">cex.lab</span><span class="o">=</span><span class="m">1.3</span><span class="p">,</span><span class="w"> </span><span class="n">cex.axis</span><span class="o">=</span><span class="m">1.1</span><span class="p">,</span><span class="w"> </span><span class="n">cex</span><span class="o">=</span><span class="m">1.4</span><span class="p">)</span><span class="w"> </span><span class="c1"># plot scaling</span>
 <span class="nf">plot</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="nf">seq</span><span class="p">(</span><span class="m">1</span><span class="p">,</span><span class="nf">length</span><span class="p">(</span><span class="n">mtcars</span><span class="o">$</span><span class="n">mpg</span><span class="p">)),</span><span class="w"> </span><span class="n">y</span><span class="o">=</span><span class="n">mtcars</span><span class="o">$</span><span class="n">mpg</span><span class="p">,</span><span class="w"> </span><span class="n">xlab</span><span class="o">=</span><span class="s">&quot;Car&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">ylab</span><span class="o">=</span><span class="s">&quot;MPG&quot;</span><span class="p">)</span>
@@ -450,23 +421,17 @@ document.write(`
 </pre></div>
 </div>
 </div>
-</details>
 <div class="cell_output docutils container">
-<a class="reference internal image-reference" href="_images/94856ccee33c0c2a33112d31ea9f75c2eb17afc492e497fd3791909d54ddf661.png"><img alt="_images/94856ccee33c0c2a33112d31ea9f75c2eb17afc492e497fd3791909d54ddf661.png" src="_images/94856ccee33c0c2a33112d31ea9f75c2eb17afc492e497fd3791909d54ddf661.png" style="width: 840px; height: 480px;" /></a>
+<a class="reference internal image-reference" href="_images/8d15081baf04dd4df150443d3acf06d0de78f1f22300120c59505602d0212cc3.png"><img alt="_images/8d15081baf04dd4df150443d3acf06d0de78f1f22300120c59505602d0212cc3.png" src="_images/8d15081baf04dd4df150443d3acf06d0de78f1f22300120c59505602d0212cc3.png" style="width: 720px; height: 420px;" /></a>
 </div>
 </div>
 <p>The vertical distances from the mean to each data point therefore tells us how much variation there is to explain. These are shown on the plot below.</p>
-<div class="cell tag_hide-input docutils container">
-<details class="hide above-input">
-<summary aria-label="Toggle hidden content">
-<span class="collapsed">Show code cell source</span>
-<span class="expanded">Hide code cell source</span>
-</summary>
+<div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="nf">par</span><span class="p">(</span><span class="n">cex.lab</span><span class="o">=</span><span class="m">1.3</span><span class="p">,</span><span class="w"> </span><span class="n">cex.axis</span><span class="o">=</span><span class="m">1.1</span><span class="p">,</span><span class="w"> </span><span class="n">cex</span><span class="o">=</span><span class="m">1.4</span><span class="p">)</span><span class="w"> </span><span class="c1"># plot scaling</span>
 <span class="nf">plot</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="m">1</span><span class="o">:</span><span class="nf">length</span><span class="p">(</span><span class="n">mtcars</span><span class="o">$</span><span class="n">mpg</span><span class="p">),</span><span class="w"> </span><span class="n">y</span><span class="o">=</span><span class="n">mtcars</span><span class="o">$</span><span class="n">mpg</span><span class="p">,</span><span class="w"> </span><span class="n">xlab</span><span class="o">=</span><span class="s">&quot;Car&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">ylab</span><span class="o">=</span><span class="s">&quot;MPG&quot;</span><span class="p">)</span>
 <span class="nf">abline</span><span class="p">(</span><span class="n">h</span><span class="o">=</span><span class="nf">mean</span><span class="p">(</span><span class="n">mtcars</span><span class="o">$</span><span class="n">mpg</span><span class="p">))</span>
-<span class="nf">for </span><span class="p">(</span><span class="n">i</span><span class="w"> </span><span class="n">in</span><span class="w"> </span><span class="m">1</span><span class="o">:</span><span class="nf">length</span><span class="p">(</span><span class="n">mtcars</span><span class="o">$</span><span class="n">mpg</span><span class="p">)){</span>
+<span class="kr">for</span><span class="w"> </span><span class="p">(</span><span class="n">i</span><span class="w"> </span><span class="kr">in</span><span class="w"> </span><span class="m">1</span><span class="o">:</span><span class="nf">length</span><span class="p">(</span><span class="n">mtcars</span><span class="o">$</span><span class="n">mpg</span><span class="p">)){</span>
 <span class="w">    </span><span class="n">x.start</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">i</span>
 <span class="w">    </span><span class="n">x.end</span><span class="w">   </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">i</span>
 <span class="w">    </span><span class="n">y.start</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">mean</span><span class="p">(</span><span class="n">mtcars</span><span class="o">$</span><span class="n">mpg</span><span class="p">)</span>
@@ -476,9 +441,8 @@ document.write(`
 </pre></div>
 </div>
 </div>
-</details>
 <div class="cell_output docutils container">
-<a class="reference internal image-reference" href="_images/d6544ac5de2ca043ed367ebfc70aaadd9b41d20715b8d35cae8fd014ca8c3f7b.png"><img alt="_images/d6544ac5de2ca043ed367ebfc70aaadd9b41d20715b8d35cae8fd014ca8c3f7b.png" src="_images/d6544ac5de2ca043ed367ebfc70aaadd9b41d20715b8d35cae8fd014ca8c3f7b.png" style="width: 840px; height: 480px;" /></a>
+<a class="reference internal image-reference" href="_images/7de0f51099acec920d03889ff17153a8a37b0ab6483373de5ecaa69a8fd7b229.png"><img alt="_images/7de0f51099acec920d03889ff17153a8a37b0ab6483373de5ecaa69a8fd7b229.png" src="_images/7de0f51099acec920d03889ff17153a8a37b0ab6483373de5ecaa69a8fd7b229.png" style="width: 720px; height: 420px;" /></a>
 </div>
 </div>
 <p>For instance, datapoint 1 sits <em>above</em> the mean and datapoint 7 sits <em>below</em> the mean. Their vertical distances are therefore</p>
@@ -502,7 +466,7 @@ document.write(`
 <div class="cell_output docutils container">
 <div class="output text_html">1.4210854715202e-14</div></div>
 </div>
-<p>The problem is that the mean is, by definition, <em>perfectly</em> in the middle of all the data and thus all the positve and negative distances will cancel and we will be left with nothing. Instead, we <em>square</em> the values<a class="footnote-reference brackets" href="#foot2" id="id2" role="doc-noteref"><span class="fn-bracket">[</span>2<span class="fn-bracket">]</span></a> before summing them</p>
+<p>The problem is that the mean is, by definition, <em>perfectly</em> in the middle of all the data and thus all the positive and negative distances will cancel and we will be left with nothing. Instead, we <em>square</em> the values<a class="footnote-reference brackets" href="#foot2" id="id2" role="doc-noteref"><span class="fn-bracket">[</span>2<span class="fn-bracket">]</span></a> before summing them</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="nf">sum</span><span class="p">((</span><span class="n">mtcars</span><span class="o">$</span><span class="n">mpg</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="nf">mean</span><span class="p">(</span><span class="n">mtcars</span><span class="o">$</span><span class="n">mpg</span><span class="p">))</span><span class="o">^</span><span class="m">2</span><span class="p">)</span>
@@ -512,7 +476,7 @@ document.write(`
 <div class="cell_output docutils container">
 <div class="output text_html">1126.0471875</div></div>
 </div>
-<p>This provides some indication of the variation in this data set, as it would be 0 if the data were constant. However, it is confounded by the fact that it is sensitive to the number of data points. For instance, we could get the same value from a data set with many data points near to the mean and a data set with a small number data points spread out from the mean. Our visual sense of variance does not depend on the amount of data, rather, it depends upon how far the data are from the mean <em>in general</em>. As such, the final step is to divide by the number of data points<a class="footnote-reference brackets" href="#df-foot" id="id3" role="doc-noteref"><span class="fn-bracket">[</span>3<span class="fn-bracket">]</span></a> to produce an <em>average</em> squared distance from the mean.</p>
+<p>This values is known as a <em>sum of squares</em> and provides some indication of the variation in this data set. However, it is confounded by the fact that it is sensitive to the number of data points. For instance, we could get the same value from a data set with many data points near to the mean and a data set with a small number data points spread out from the mean. Our visual sense of variance does not depend on the amount of data, rather, it depends upon how far the data are from the mean <em>in general</em>. As such, the final step is to divide by the number of data points to produce an <em>average</em> squared distance from the mean.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="nf">sum</span><span class="p">((</span><span class="n">mtcars</span><span class="o">$</span><span class="n">mpg</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="nf">mean</span><span class="p">(</span><span class="n">mtcars</span><span class="o">$</span><span class="n">mpg</span><span class="p">))</span><span class="o">^</span><span class="m">2</span><span class="p">)</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="nf">length</span><span class="p">(</span><span class="n">mtcars</span><span class="o">$</span><span class="n">mpg</span><span class="p">)</span>
@@ -522,13 +486,18 @@ document.write(`
 <div class="cell_output docutils container">
 <div class="output text_html">35.188974609375</div></div>
 </div>
-<p>From this, we can conclude that the average squared distance from the mean is <span class="math notranslate nohighlight">\(35.19\)</span>. This is the total amount of <em>variance</em> within these data and thus indicates the value that we want to explain. Very generally, the aim of a statistical model is to break this value up into independent chunks that can be attributed to different sources. The magnitude of these chunks relative to the amount that we <em>cannot</em> explain gives us an indication of how <em>meaningful</em> or <em>important</em> these sources are, as well as indicating how well the statistical model is able to predict future values.</p>
+<p>From this, we can conclude that the average squared distance from the mean is <span class="math notranslate nohighlight">\(35.19\)</span>. This is the total amount of <em>variance</em> within these data and thus indicates the value that we want to explain. Very generally, the aim of a statistical model is to break this value up into independent chunks that can be attributed to different sources.</p>
+<div class="tip admonition">
+<p class="admonition-title">Bessel’s Correction</p>
+<p>In the example above, we simply divided the sum-of-squares by <span class="math notranslate nohighlight">\(n\)</span> to give the average squared distanced within this data set. Although intuitive, there is a problem with doing this.</p>
+</div>
 </section>
 <section id="interpreting-variance">
 <h2>Interpreting Variance<a class="headerlink" href="#interpreting-variance" title="Link to this heading">#</a></h2>
-<p>One of the disadvantages of the definition of variance given above is that it is expressed in squared-units of the variable in question, which can be hard to interpret. As such, when interpretation matters, it is more usual to use <span class="math notranslate nohighlight">\(\sigma\)</span> rather than <span class="math notranslate nohighlight">\(\sigma^{2}\)</span>, by taking the square-root of the variance. This produces a value in the original units of the variable and can be interpreted as the average deviation from the mean. This should be familiar to you as the <em>standard deviation</em>. For example, <span class="math notranslate nohighlight">\(\sqrt{35.19} = 5.93\)</span>. So, the average amount that cars deviate from the mean is 5.93 MPG. Note that this is mainly useful for <em>interpretation</em>, but scaling the variance in this fashion is not always needed. For instance, if we are taking ratios of variance, whether we do so in the original units or in scaled units will make no difference.</p>
+<p>One of the disadvantages of the definition of variance given above is that it is expressed in squared-units of the variable in question, which can be hard to interpret.</p>
 <section id="the-standard-deviation">
 <h3>The Standard Deviation<a class="headerlink" href="#the-standard-deviation" title="Link to this heading">#</a></h3>
+<p>When interpretation matters, it is more usual to use <span class="math notranslate nohighlight">\(\sigma\)</span> rather than <span class="math notranslate nohighlight">\(\sigma^{2}\)</span>, by taking the square-root of the variance. This produces a value in the original units of the variable and can be interpreted as the average deviation from the mean. This should be familiar to you as the <em>standard deviation</em>. For example, <span class="math notranslate nohighlight">\(\sqrt{35.19} = 5.93\)</span>. So, the average amount that cars deviate from the mean is 5.93 MPG. Note that this is mainly useful for <em>interpretation</em>, but scaling the variance in this fashion is not always needed. For instance, if we are taking ratios of variance, whether we do so in the original units or in scaled units will make no difference.</p>
 </section>
 <section id="scaling-distances">
 <h3>Scaling Distances<a class="headerlink" href="#scaling-distances" title="Link to this heading">#</a></h3>
@@ -539,6 +508,7 @@ document.write(`
 <ul class="simple">
 <li><p>What variance is, in terms of data points differing in value from one another.</p></li>
 <li><p>How variance can be measured by defining a baseline value (usually the <em>mean</em>) and measuring the vertical distances from that baseline.</p></li>
+<li><p>Why it is more typicak to divide by <span class="math notranslate nohighlight">\(n-1\)</span> when calculating the variance.</p></li>
 <li><p>How variance can be interpreted, particularly in terms of taking the square-root to calculate the <em>standard deviation</em>.</p></li>
 <li><p>How the standard deviation can be used to scale distances into the same units, irrespective of the data in question.</p></li>
 </ul>
@@ -552,10 +522,6 @@ document.write(`
 <aside class="footnote brackets" id="foot2" role="note">
 <span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id2">2</a><span class="fn-bracket">]</span></span>
 <p>You might think that taking the <em>absolute value</em> of the data before summing would make more sense. This is a metric known as the <em>mean absolute deviation</em> (MAD), which is a perfectly legitimate way of measuring the <em>spread</em> of data around a central point. However, using squared values has some useful properties. Firstly, it <em>emphasises</em> larger distances in the sum, which emphasises the importance of bigger discrepancies from the mean. From a mathematical perspective, squares are also easier to work with and manipulate compared to something like the absolute value.</p>
-</aside>
-<aside class="footnote brackets" id="df-foot" role="note">
-<span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id3">3</a><span class="fn-bracket">]</span></span>
-<p>You may know that it is more typical to divide by <span class="math notranslate nohighlight">\(n-1\)</span> rather than <span class="math notranslate nohighlight">\(n\)</span>. When working with an <em>estimate</em> of the mean, using <span class="math notranslate nohighlight">\(n-1\)</span> leads to an <em>unbiased</em> estimate of the variance. However, this is a somewhat ancilliary point that is not all that important for understanding the nature of variance.</p>
 </aside>
 </aside>
 </section>
@@ -617,7 +583,8 @@ document.write(`
             
             
               
-                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+                <dialog id="pst-secondary-sidebar-modal"></dialog>
+                <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
 
 
   <div class="sidebar-secondary-item">
@@ -681,8 +648,8 @@ By Dr George Farmer & Dr Martyn McFarquhar
   </div>
   
   <!-- Scripts loaded after <body> so the DOM is not blocked -->
-  <script src="_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
-<script src="_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+  <script defer src="_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf"></script>
+<script defer src="_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf"></script>
 
   <footer class="bd-footer">
   </footer>
