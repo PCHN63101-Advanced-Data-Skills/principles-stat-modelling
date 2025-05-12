@@ -390,8 +390,8 @@
 <p>Now that we have more of a sense of what a model is, let us talk more specifically about the elements that make up a statistical model. The aim here is to remain very general so that the same framework can be used for a wide variety of analyses. This disadavantage of doing this is that it will be a bit abstract to begin with. However, just try and absorb this way of thinking as best you can and hopefully it will make more sense when we start to see applications in the coming weeks.</p>
 <section id="variable-terminology">
 <h2>Variable Terminology<a class="headerlink" href="#variable-terminology" title="Link to this heading">#</a></h2>
-<p>Before going any further, we need to define some terminology. So far, we have only focussed on a single variable that is measured as part of an experiment. However, an experiment is more than just an exercise in <em>measurement</em> of one variable. Rather, an experiment is an exercise in assessing how that measurement <em>changes</em> after the manipulation of other variables<a class="footnote-reference brackets" href="#manip-foot" id="id1" role="doc-noteref"><span class="fn-bracket">[</span>1<span class="fn-bracket">]</span></a>. In order to discuss statistical models, we therefore need to discuss these other variables and how they can be integrated into the framework we have already established.</p>
-<p>Our variable of primary interest is known as the <em>outcome variable</em>, whereas any other variables that we believe are related to the outcome are known as <em>predictor</em> variables. For example, within the <code class="docutils literal notranslate"><span class="pre">mtcars</span></code> dataset we can consider <code class="docutils literal notranslate"><span class="pre">mpg</span></code> as our outcome variable with <code class="docutils literal notranslate"><span class="pre">wt</span></code> (<em>weight</em>) and <code class="docutils literal notranslate"><span class="pre">hp</span></code> (<em>horsepower</em>) as our predictor variables. In notation, we refer to our outcome as <span class="math notranslate nohighlight">\(y\)</span> and our predictors as <span class="math notranslate nohighlight">\(x\)</span>. Our assumption is then that the value of our <em>outcome</em> is some function of our <span class="math notranslate nohighlight">\(k\)</span> <em>predictors</em>, plus error</p>
+<p>Before going any further, we need to define some terminology. So far, we have only focussed on a single variable that is measured as part of an experiment. However, an experiment is more than just an exercise in <em>measurement</em>. Rather, an experiment is an exercise in assessing how that measurement <em>changes</em> after the manipulation of other variables<a class="footnote-reference brackets" href="#manip-foot" id="id1" role="doc-noteref"><span class="fn-bracket">[</span>1<span class="fn-bracket">]</span></a>. In order to discuss statistical models, we therefore need to discuss these other variables and how they can be integrated into the framework we have already established.</p>
+<p>Our variable of primary interest is known as the <em>outcome variable</em>, whereas any other variables that we believe to be related to the outcome are known as <em>predictor</em> variables. For example, within the <code class="docutils literal notranslate"><span class="pre">mtcars</span></code> dataset we can consider <code class="docutils literal notranslate"><span class="pre">mpg</span></code> as our outcome variable with <code class="docutils literal notranslate"><span class="pre">wt</span></code> (<em>weight</em>) and <code class="docutils literal notranslate"><span class="pre">hp</span></code> (<em>horsepower</em>) as our predictor variables. In notation, we refer to our outcome as <span class="math notranslate nohighlight">\(y\)</span> and our predictors as <span class="math notranslate nohighlight">\(x\)</span>. Our assumption is then that the value of our <em>outcome</em> is some function of our <span class="math notranslate nohighlight">\(k\)</span> <em>predictors</em>, plus error</p>
 <div class="math notranslate nohighlight">
 \[
 y = f(\mathbf{x}) + \epsilon,
@@ -401,7 +401,7 @@ y = f(\mathbf{x}) + \epsilon,
 \[
 \mathbf{x} = \left\{x_{1}, x_{2}, x_{3}, \dots, x_{k}\right\}.
 \]</div>
-<p>This is just a formal way of saying that we assume that there is some <em>connection</em> between our outcome and our predictors. The actual form of this connection is not known, but we assume it exists, otherwise, why did we conduct the experiment? In the <code class="docutils literal notranslate"><span class="pre">mtcars</span></code> example, we could write</p>
+<p>This is just a formal way of saying that we assume that there is some <em>connection</em> between our outcome and our predictors. The actual form of this connection is not known, but we assume it exists (otherwise, why did we conduct the experiment?) In the <code class="docutils literal notranslate"><span class="pre">mtcars</span></code> example, we could write</p>
 <div class="math notranslate nohighlight">
 \[
 \text{MPG} = f(\text{Weight}, \text{Horsepower}) + \epsilon,
@@ -480,7 +480,7 @@ y_{i}|\mathbf{x}_{i} \sim \mathcal{N}\left(\mu_{i},\sigma^{2}\right).
 \[
 E\left(y_{i}|\mathbf{x}_{i}\right) = \mu_{i} = \mu.
 \]</div>
-<p>If we integrate the mean function into the probability model and drop the conditional notation (just to simplift things), we have a model with the form</p>
+<p>If we integrate the mean function into the probability model and drop the conditional notation (just to simplify things), we have a model with the form</p>
 <div class="math notranslate nohighlight">
 \[
 y_{i} \sim \mathcal{N}\left(\mu,\sigma^{2}\right),
@@ -574,30 +574,6 @@ y_{i} \sim \mathcal{N}\left(\beta_{0} + \beta_{1}x_{i1},\sigma^{2}\right),
 <p class="admonition-title">The Mean Function as the <em>Predictable</em> Element</p>
 <p>Thinking back to our discussion in the previous section, because the mean function defines the <em>expected value</em> of the population distributions, it can be thought of as defining the <em>predictable</em> element of the random variable <span class="math notranslate nohighlight">\(y\)</span>. When building a model, a core aim is to make sure the mean function appears to fit the data. If it does, then the mean function is assumed to provide a reliable simplification of the connection between our predictor variables and our outcome variable. As such, it must be capturing something of the data-generating process and thus will allow us to say something about the predictable patterns within the data we have collected. For instance, if the simple regression mean function appears to fit well, then we can simplify the relationships within our data in terms of a straight-line. We can then use the properties of this line (i.e. the <em>intercept</em> and <em>slope</em>) to reach conclusions about the magnitude and direction of this relationship, as well as make predictions about future values.</p>
 </div>
-<div class="warning dropdown admonition">
-<p class="admonition-title">Advanced: How do mean functions work with other distributions?</p>
-<p>To help understand the purpose of a mean function, it can be helpful to see how this works generically across different population distributions. As an example, consider assuming a binomial distribution of the form</p>
-<div class="math notranslate nohighlight">
-\[
-y_{i} | x_{i1} \sim \mathcal{B}\left(n,p_{i}\right).
-\]</div>
-<p>Here, the number of trials <span class="math notranslate nohighlight">\(n\)</span> is fixed, but we allow the probability of success <span class="math notranslate nohighlight">\(p\)</span> to differ across values of <span class="math notranslate nohighlight">\(y\)</span>. The expected value of a binomial random variate is given by <span class="math notranslate nohighlight">\(E(y) = n \times p\)</span>. As such, for the model above, the mean function would have the form</p>
-<div class="math notranslate nohighlight">
-\[
-E\left(y_{i}|x_{i1}\right) = n \times p_{i}.
-\]</div>
-<p>In order to take the predictor variables into account, we need some way of converting their values into a probability of success for the <span class="math notranslate nohighlight">\(i\)</span>th value of <span class="math notranslate nohighlight">\(y\)</span>. As such, we need a mean function of the form</p>
-<div class="math notranslate nohighlight">
-\[
-E\left(y_{i}|x_{i1}\right) = n \times p_{i}\left(x_{i1}\right),
-\]</div>
-<p>where <span class="math notranslate nohighlight">\(p_{i}\left(x_{i1}\right)\)</span> is some function that can convert our single predictor into a probability. A common method is to use a <em>logistic</em> function, so the mean function has the form</p>
-<div class="math notranslate nohighlight">
-\[
-E\left(y_{i}|x_{i1}\right) = n \times p_{i} = n \times \frac{1}{1 + e^{-\left(\beta_{0} + \beta_{1}x_{i1}\right)}}.
-\]</div>
-<p>The specific details of this do not matter for the moment. The main point is that the mean function allows us to define a method for converting our predictor variables into the expected value of the assumed distribution. This works for <em>any</em> distribution, whether the mean is directly encoded in its parameters or not.</p>
-</div>
 </section>
 <section id="component-3-the-variance-function">
 <h2>Component 3: The Variance Function<a class="headerlink" href="#component-3-the-variance-function" title="Link to this heading">#</a></h2>
@@ -659,7 +635,6 @@ y_{i} \sim \mathcal{N}\left(\mu,\sigma^{2}\right),
 <div class="tip admonition">
 <p class="admonition-title">The Variance Function as the <em>Unpredictable</em> Element</p>
 <p>Again, thinking back to our previous discussion, if the mean function captures the predictable element of our random variable, then the variance function captures the <em>unpredictable</em> element. In effect, the variance function seeks to capture the <em>structure</em> of the model errors. This involves capturing all the reasons why the data does not conform to the expected value. In the simplest case, we can just assume that there is a constant degree of non-conformity, irrespective of the value of any of the predictor variables. In other words, the variance function just produces a single value. In more complex cases, the predictor variables can be used to dictate a more complex structure, including difference variances for different data groupings or some form of correlational structure.</p>
-<p>Although this need to capture the structure of the errors might seem less important than the mean function for reaching conclusions about our data, the variance function comes into its own when we consider model <em>estimation</em> and <em>inference</em>, because this directly informs our degree of uncertainty when reaching conclusions about a population on the basis of a sample. As such, getting the variance function correct can be critical for reaching conclusions that are valid and not subject to any bias.</p>
 </div>
 <aside class="topic">
 <p class="topic-title">What do you now know?</p>
