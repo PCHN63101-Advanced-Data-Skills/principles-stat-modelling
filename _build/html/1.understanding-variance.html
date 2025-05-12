@@ -389,7 +389,7 @@
                   
   <section class="tex2jax_ignore mathjax_ignore" id="understanding-variance">
 <h1>Understanding Variance<a class="headerlink" href="#understanding-variance" title="Link to this heading">#</a></h1>
-<p>Statistics is a branch of science concerned with understanding uncertainty of measurements through the building of <em>models</em>. Although your prior experiences may have left the impression that statistics is about <em>hypothesis tests</em>, the reality is that this is a very narrow perspective. The concept of a data analysis being an exercise in <em>model building</em> is fundamental to a much deeper understanding of statistics, and is fundamental to your success on the rest of this course. To facilitate this, we will start with some core principles that are essential for developing an intuitive understanding of statistical models. Perhaps more than any other concept in statistics, the idea of <em>variance</em> is essential for understanding what purpose a statistical model serves.</p>
+<p>Statistics is an area of science concerned with understanding uncertainty through the building of <em>models</em>. Although your prior experiences may have left the impression that statistics is about <em>hypothesis tests</em>, the reality is that this is a very narrow perspective. The concept of a data analysis being an exercise in <em>model building</em> is fundamental to a much deeper understanding of statistics, and is fundamental to your success on the rest of this course. To facilitate this, we will start with some core principles that are essential for developing an intuitive understanding of statistical models. Perhaps more than any other concept in statistics, the idea of <em>variance</em> is essential for understanding what purpose a statistical model serves.</p>
 <section id="defining-variance">
 <h2>Defining Variance<a class="headerlink" href="#defining-variance" title="Link to this heading">#</a></h2>
 <p>Variance is the basic currency of statistics. It is the fundamental information that data holds and is the feature of data that all statistical models aim to capture. Variance is therefore a very important concept and so we need to be clear on what <em>exactly</em> variance is. Informally, the idea of variance is very simple. For a given set of data, we want to understand the reason why the measured values are different from each other. In other words, why does the data <em>vary</em>? If data did not vary, it would be constant. Every time we took a measurement we would get the same value. In this scenario, the data would be <em>perfectly predictable</em> and there would be no need for statistics.</p>
@@ -489,26 +489,79 @@
 <p>From this, we can conclude that the average squared distance from the mean is <span class="math notranslate nohighlight">\(35.19\)</span>. This is the total amount of <em>variance</em> within these data and thus indicates the value that we want to explain. Very generally, the aim of a statistical model is to break this value up into independent chunks that can be attributed to different sources.</p>
 <div class="tip admonition">
 <p class="admonition-title">Bessel’s Correction</p>
-<p>In the example above, we simply divided the sum-of-squares by <span class="math notranslate nohighlight">\(n\)</span> to give the average squared distanced within this data set. Although intuitive, there is a problem with doing this.</p>
+<p>In the example above, we simply divided the sum-of-squares by <span class="math notranslate nohighlight">\(n\)</span> to give the average squared distanced within this data set. Although intuitive, there is a problem with doing this. In general, when working with a dataset, we do not have access to all the data that defines our <em>population</em> of interest. Instead, our data is treated as a <em>sample</em> from that population. Ultimately, we want to use the sample to learn about the population. As such, we use the data to make <em>estimates</em> of the properties of the population. Variance is one such example. In general, we are interested in the variation within the <em>population</em> and not the <em>sample</em>. As it turns out, estimating the population variance by dividing the sum-of-squares by <span class="math notranslate nohighlight">\(n\)</span> produces a value that is <em>biased</em>. What this means is that this method of estimation will not, on average, capture the true value of the population variance. To get around this, we have to use something called <a class="reference external" href="https://en.wikipedia.org/wiki/Bessel%27s_correction">Bessel’s correction</a>. Very simply, this means that we divide by <span class="math notranslate nohighlight">\(n-1\)</span> instead of <span class="math notranslate nohighlight">\(n\)</span>. If we had the whole population at our disposal, then dividing by <span class="math notranslate nohighlight">\(n\)</span> is fine. As such, the example above assumes that the cars in the <code class="docutils literal notranslate"><span class="pre">mtcars</span></code> dataset are the only cars we care about and thus represent the whole population. If, instead, we wished to treat the cars as a <em>sample</em>, we would need to divide by <span class="math notranslate nohighlight">\(n-1\)</span>. Notably, the built-in <code class="docutils literal notranslate"><span class="pre">var()</span></code> function in <code class="docutils literal notranslate"><span class="pre">R</span></code> will always divide by <span class="math notranslate nohighlight">\(n-1\)</span>, as this is the most common use case.</p>
 </div>
 </section>
 <section id="interpreting-variance">
 <h2>Interpreting Variance<a class="headerlink" href="#interpreting-variance" title="Link to this heading">#</a></h2>
-<p>One of the disadvantages of the definition of variance given above is that it is expressed in squared-units of the variable in question, which can be hard to interpret.</p>
+<p>Although we now have some measure of variance, one of the disadvantages of the definition given above is that it is expressed in squared-units of the variable in question. This can be quite hard to interpret. For some problems, this does not matter because the variance is simply a quantity that we wish to manipulate in some fashion. You can think of this as similar to a recipe where ingredient weights are given in either grams or ounces. It does not matter which one we use as the important element is their <em>ratio</em>, not the actual interpretation of the amounts. However, there are cases where we may wish to <em>interpret</em> the meaning of the variance units, which will usually require some form of conversion.</p>
 <section id="the-standard-deviation">
 <h3>The Standard Deviation<a class="headerlink" href="#the-standard-deviation" title="Link to this heading">#</a></h3>
-<p>When interpretation matters, it is more usual to use <span class="math notranslate nohighlight">\(\sigma\)</span> rather than <span class="math notranslate nohighlight">\(\sigma^{2}\)</span>, by taking the square-root of the variance. This produces a value in the original units of the variable and can be interpreted as the average deviation from the mean. This should be familiar to you as the <em>standard deviation</em>. For example, <span class="math notranslate nohighlight">\(\sqrt{35.19} = 5.93\)</span>. So, the average amount that cars deviate from the mean is 5.93 MPG. Note that this is mainly useful for <em>interpretation</em>, but scaling the variance in this fashion is not always needed. For instance, if we are taking ratios of variance, whether we do so in the original units or in scaled units will make no difference.</p>
+<p>When interpretation matters, it is more usual to use <span class="math notranslate nohighlight">\(\sigma\)</span> rather than <span class="math notranslate nohighlight">\(\sigma^{2}\)</span>, by taking the square-root of the variance. This produces a value in the original units of the variable and can be interpreted as the average deviation from the mean. This should be familiar to you as the <em>standard deviation</em>.</p>
+<p>As an example, if we recalculate the variance of <code class="docutils literal notranslate"><span class="pre">mpg</span></code> using Bessel’s correction, we have</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="nf">var</span><span class="p">(</span><span class="n">mtcars</span><span class="o">$</span><span class="n">mpg</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html">36.3241028225806</div></div>
+</div>
+<p>Taking the square-root gives us the standard deviation</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="nf">sqrt</span><span class="p">(</span><span class="nf">var</span><span class="p">(</span><span class="n">mtcars</span><span class="o">$</span><span class="n">mpg</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html">6.0269480520891</div></div>
+</div>
+<p>Which we can also achieve with less typing by using the <code class="docutils literal notranslate"><span class="pre">sd()</span></code> function</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="nf">sd</span><span class="p">(</span><span class="n">mtcars</span><span class="o">$</span><span class="n">mpg</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html">6.0269480520891</div></div>
+</div>
+<p>So, the average amount that cars deviate from the mean is estimated to be 6.03 MPG. Here, we can more easily interpret the average amount of variation within the data using the original units.</p>
 </section>
 <section id="scaling-distances">
 <h3>Scaling Distances<a class="headerlink" href="#scaling-distances" title="Link to this heading">#</a></h3>
-<p>Sometimes it is useful to express distances in units of standard deviation, because this makes the description unit-less and thus applicable to lots of different types of data. For instance, we saw above that datapoint 7 was 5.79 MPG below the mean. The standard deviation for this dataset, based on the variance calculated above, is <span class="math notranslate nohighlight">\(\sigma = \sqrt{35.19} = 5.93\)</span>. If we divide these values, we can express datapoint 7’s discrepancy in terms of standard deviations, giving <span class="math notranslate nohighlight">\(\frac{-5.79}{5.93} = -0.98\)</span>. As such, we can say that datapoint 7 lies 0.98 standard deviations below the mean, irrespective of the original units of the data. You may recognise this as the process used to create <em>test statistics</em>, which is something we will return to later in this lesson.</p>
+<p>As well as a means of more easily interpreting variance, it can also be useful sometimes to express individual distances in units of standard deviation. This is because it standardises distances measured on different scales onto the same scale, making intepretation easier and comparisons across different measurements possible.</p>
+<p>As an example, we saw earlier that datapoint 7 was 5.79 MPG below the mean. The standard deviation for this dataset was calculated above as <span class="math notranslate nohighlight">\(\sigma = \sqrt{36.32} = 6.03\)</span>. If we divide these values, we can express datapoint 7’s discrepancy in terms of standard deviations, giving <span class="math notranslate nohighlight">\(\frac{-5.79}{6.03} = -0.96\)</span>. As such, we can say that datapoint 7 lies 0.98 standard deviations below the mean, irrespective of the original units of the data. This type of scaling is sometimes known as a <span class="math notranslate nohighlight">\(z\)</span>-score transformation and is shown for all the data from <code class="docutils literal notranslate"><span class="pre">mtcars</span></code> in the plot below</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="nf">par</span><span class="p">(</span><span class="n">cex.lab</span><span class="o">=</span><span class="m">1.3</span><span class="p">,</span><span class="w"> </span><span class="n">cex.axis</span><span class="o">=</span><span class="m">1.1</span><span class="p">,</span><span class="w"> </span><span class="n">cex</span><span class="o">=</span><span class="m">1.4</span><span class="p">)</span><span class="w"> </span><span class="c1"># plot scaling</span>
+<span class="n">std.mpg</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="p">(</span><span class="n">mtcars</span><span class="o">$</span><span class="n">mpg</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="nf">mean</span><span class="p">(</span><span class="n">mtcars</span><span class="o">$</span><span class="n">mpg</span><span class="p">))</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="nf">sd</span><span class="p">(</span><span class="n">mtcars</span><span class="o">$</span><span class="n">mpg</span><span class="p">)</span>
+<span class="nf">plot</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="m">1</span><span class="o">:</span><span class="nf">length</span><span class="p">(</span><span class="n">std.mpg</span><span class="p">),</span><span class="w"> </span><span class="n">y</span><span class="o">=</span><span class="n">std.mpg</span><span class="p">,</span><span class="w"> </span><span class="n">xlab</span><span class="o">=</span><span class="s">&quot;Car&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">ylab</span><span class="o">=</span><span class="s">&quot;MPG (z-score)&quot;</span><span class="p">)</span>
+<span class="nf">abline</span><span class="p">(</span><span class="n">h</span><span class="o">=</span><span class="m">0</span><span class="p">)</span>
+<span class="kr">for</span><span class="w"> </span><span class="p">(</span><span class="n">i</span><span class="w"> </span><span class="kr">in</span><span class="w"> </span><span class="m">1</span><span class="o">:</span><span class="nf">length</span><span class="p">(</span><span class="n">std.mpg</span><span class="p">)){</span>
+<span class="w">    </span><span class="n">x.start</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">i</span>
+<span class="w">    </span><span class="n">x.end</span><span class="w">   </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">i</span>
+<span class="w">    </span><span class="n">y.start</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="m">0</span>
+<span class="w">    </span><span class="n">y.end</span><span class="w">   </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">std.mpg</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+<span class="w">    </span><span class="nf">lines</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="nf">c</span><span class="p">(</span><span class="n">x.start</span><span class="p">,</span><span class="n">x.end</span><span class="p">),</span><span class="w"> </span><span class="n">y</span><span class="o">=</span><span class="nf">c</span><span class="p">(</span><span class="n">y.start</span><span class="p">,</span><span class="n">y.end</span><span class="p">),</span><span class="w"> </span><span class="n">lty</span><span class="o">=</span><span class="m">2</span><span class="p">)</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<a class="reference internal image-reference" href="_images/3f1ade3d9276b7875df2d861e1373f69754c00d15dd84fe4e6abc892a891d1f0.png"><img alt="_images/3f1ade3d9276b7875df2d861e1373f69754c00d15dd84fe4e6abc892a891d1f0.png" src="_images/3f1ade3d9276b7875df2d861e1373f69754c00d15dd84fe4e6abc892a891d1f0.png" style="width: 720px; height: 420px;" /></a>
+</div>
+</div>
+<p>This scaling of distances is most usually found in the calculation of <em>effect sizes</em> and in the calculation of <em>test statistics</em>. In both cases, rendering an effect expressed in the original units of the data into an effect expressed in standard deviation units allows for comparisons across different dataset and allows us to reach generic conclusions, irrespective of the original units of the data. We will discuss this in more detail later in this unit, but it is useful to get a sense of how the standard deviation can be used to <em>standardise</em> values at this point.</p>
 <aside class="topic">
 <p class="topic-title">What do you now know?</p>
 <p>In this section, we have explored the important concept of <em>variance</em> as the primary source of information within any data set. After reading this section, you should have a good sense of:</p>
 <ul class="simple">
 <li><p>What variance is, in terms of data points differing in value from one another.</p></li>
 <li><p>How variance can be measured by defining a baseline value (usually the <em>mean</em>) and measuring the vertical distances from that baseline.</p></li>
-<li><p>Why it is more typicak to divide by <span class="math notranslate nohighlight">\(n-1\)</span> when calculating the variance.</p></li>
+<li><p>Why it is more typical to divide by <span class="math notranslate nohighlight">\(n-1\)</span> when calculating the variance.</p></li>
 <li><p>How variance can be interpreted, particularly in terms of taking the square-root to calculate the <em>standard deviation</em>.</p></li>
 <li><p>How the standard deviation can be used to scale distances into the same units, irrespective of the data in question.</p></li>
 </ul>
