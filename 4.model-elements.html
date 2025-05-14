@@ -583,7 +583,7 @@ y_{i} \sim \mathcal{N}\left(\beta_{0} + \beta_{1}x_{i1},\sigma^{2}\right),
 \[
 \text{Var}\left(y_{i}|\mathbf{x}_{i}\right) = \sigma^{2},
 \]</div>
-<p>meaning that, irrespective of the values of the predictor variables, the variance of <span class="math notranslate nohighlight">\(y\)</span> is assumes to be the same for every observation. If we also assumed a constant mean then the full probability model for a single predictor would be</p>
+<p>meaning that, irrespective of the values of the predictor variables, the variance of <span class="math notranslate nohighlight">\(y\)</span> is assumed to be the same for every observation. If we also assumed a constant mean then the full probability model for a single predictor would be</p>
 <div class="math notranslate nohighlight">
 \[\begin{split}
 \begin{array}{rlr}
@@ -605,7 +605,7 @@ y_{i} \sim \mathcal{N}\left(\mu,\sigma^{2}\right),
     \epsilon_{i} &amp;\sim \mathcal{N}\left(0,\sigma^{2}\right).
 \end{align*}
 \end{split}\]</div>
-<p>A single fixed variance is what we implicitly assumed for all the models in the previous section, and is what a lot of applied statistical models also assume, for reasons we will discuss later on the unit.</p>
+<p>A single fixed variance is what we implicitly assumed for all the models in the previous section, and is what a lot of applied statistical models also assume, for reasons we will discuss later on the course.</p>
 <p>We could also assume a more complex variance function. For instance, in the example of <code class="docutils literal notranslate"><span class="pre">mpg</span></code>, we could specify a variance that is scaled by the value of <code class="docutils literal notranslate"><span class="pre">wt</span></code></p>
 <div class="math notranslate nohighlight">
 \[
@@ -634,18 +634,16 @@ y_{i} \sim \mathcal{N}\left(\mu,\sigma^{2}\right),
 </div>
 <div class="tip admonition">
 <p class="admonition-title">The Variance Function as the <em>Unpredictable</em> Element</p>
-<p>Again, thinking back to our previous discussion, if the mean function captures the predictable element of our random variable, then the variance function captures the <em>unpredictable</em> element. In effect, the variance function seeks to capture the <em>structure</em> of the model errors. This involves capturing all the reasons why the data does not conform to the expected value. In the simplest case, we can just assume that there is a constant degree of non-conformity, irrespective of the value of any of the predictor variables. In other words, the variance function just produces a single value. In more complex cases, the predictor variables can be used to dictate a more complex structure, including difference variances for different data groupings or some form of correlational structure.</p>
+<p>Again, thinking back to our previous discussion, if the mean function captures the predictable element of our random variable, then the variance function captures the <em>unpredictable</em> element. In effect, the variance function seeks to capture the <em>structure</em> of the model errors. This involves capturing all the reasons why the data does not conform to the expected value. In the simplest case, we can just assume that there is a constant degree of non-conformity, irrespective of the value of any of the predictor variables. In other words, the variance function just produces a single value. In more advanced cases, the predictor variables can be used to dictate a more complex structure, including difference variances for different data groupings as well as different forms of correlational structure.</p>
 </div>
 <aside class="topic">
 <p class="topic-title">What do you now know?</p>
 <p>In this section, we have explored the concept of a <em>parametric statistical model</em> more formally, particularly in terms of the 3 core elements of a model. After reading this section, you should have a good sense of:</p>
 <ul class="simple">
-<li><p>The difference between <em>outcome</em> and <em>predictor</em> variables, as well as alternative terms for these concepts that you may already know.</p></li>
+<li><p>The difference between <em>outcome</em> and <em>predictor</em> variables, as well as alternative terms for these concepts.</p></li>
 <li><p>The concept that a parametric statistical model can be fully described by its <em>population distribution</em>, <em>mean function</em> and <em>variance function</em>.</p></li>
-<li><p>What the role of the <em>population distribution</em> is within a statistical model.</p></li>
-<li><p>The definition of the <em>mean function</em> as the expected value of <span class="math notranslate nohighlight">\(y_{i}\)</span> given the value of the predictors <span class="math notranslate nohighlight">\(\mathbf{x}_{i}\)</span>.</p></li>
+<li><p>The role of the <em>population distribution</em> is within a statistical model.</p></li>
 <li><p>The notion that we decide what expression to use for the mean function in order to generate an expected value of <span class="math notranslate nohighlight">\(y_{i}\)</span> and, in doing so, dictate the form of the relationship between our outcome and predictors.</p></li>
-<li><p>The definition of the <em>variance function</em> as the variance of <span class="math notranslate nohighlight">\(y_{i}\)</span> given the value of the predictors <span class="math notranslate nohighlight">\(\mathbf{x}_{i}\)</span>.</p></li>
 <li><p>The notion that we decide what expression to use for the variance function in order to adjust the width of the population distribution and, in doing so, dictate how the width shifts across different values of the predictors.</p></li>
 <li><p>The concept that different mean and variance functions produce <em>different models</em> and that our job, generally, is to find the mean and variance function that best fits our data.</p></li>
 </ul>
