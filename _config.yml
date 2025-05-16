@@ -2,8 +2,8 @@
 # Learn more at https://jupyterbook.org/customize/config.html
 
 title: "The Principles of Statistical Modelling"
-author: Dr George Farmer & Dr Martyn McFarquhar
-copyright: "2026"
+author: Dr Martyn McFarquhar & Dr George Farmer
+copyright: "2025"
 logo: logo.png
 
 # Force re-execution of notebooks on each build.
